@@ -1,0 +1,293 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { 
+  Wallet, 
+  Shield, 
+  Coins, 
+  TrendingUp, 
+  ArrowRight, 
+  CheckCircle,
+  Play,
+  BookOpen,
+  Zap
+} from "lucide-react"
+import { useWallet } from "@/contexts/WalletContext"
+import { toast } from "@/hooks/use-toast"
+
+interface OnboardingStep {
+  id: string
+  title: string
+  description: string
+  icon: React.ReactNode
+  completed: boolean
+  action?: () => void
+  actionText?: string
+}
+
+export function UserOnboarding() {
+  const [currentStep, setCurrentStep] = useState(0)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+  const { isConnected, connectWallet } = useWallet()
+
+  useEffect(() => {
+    // Check if user has completed onboarding
+    const hasCompletedOnboarding = localStorage.getItem("engipay-onboarding-completed")
+    if (!hasCompletedOnboarding && !isConnected) {
+      setShowOnboarding(true)
+    }
+  }, [isConnected])
+
+  const steps: OnboardingStep[] = [
+    {
+      id: "welcome",
+      title: "Welcome to EngiPay",
+      description: "Crypto payments and Naira cash-out in one app. Let's get you started with a quick tour.",
+      icon: <Zap className="w-8 h-8" />,
+      completed: true,
+    },
+    {
+      id: "connect-wallet",
+      title: "Connect Your Wallet",
+      description: "Connect any Web3 wallet to start using EngiPay — MetaMask, Rainbow, Coinbase Wallet, or any mobile wallet via WalletConnect.",
+      icon: <Wallet className="w-8 h-8" />,
+      completed: isConnected,
+      action: () => connectWallet(),
+      actionText: "Connect Wallet"
+    },
+    {
+      id: "security",
+      title: "Security First",
+      description: "Your funds remain in your wallet at all times. We never have access to your private keys.",
+      icon: <Shield className="w-8 h-8" />,
+      completed: isConnected,
+    },
+    {
+      id: "features",
+      title: "Explore Features",
+      description: "Send and receive, scan to pay, send Bitcoin, and convert to Naira - all in one app.",
+      icon: <Coins className="w-8 h-8" />,
+      completed: false,
+    },
+  ]
+
+  const progress = (steps.filter(step => step.completed).length / steps.length) * 100
+
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1)
+    } else {
+      completeOnboarding()
+    }
+  }
+
+  const handleSkip = () => {
+    completeOnboarding()
+  }
+
+  const completeOnboarding = () => {
+    localStorage.setItem("engipay-onboarding-completed", "true")
+    setShowOnboarding(false)
+    toast({
+      title: "Welcome to EngiPay!",
+      description: "You're all set to start sending, receiving and converting.",
+    })
+  }
+
+  const handleStepAction = (step: OnboardingStep) => {
+    if (step.action) {
+      step.action()
+    }
+  }
+
+  if (!showOnboarding) return null
+
+  const currentStepData = steps[currentStep]
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto glassmorphism">
+        <CardHeader className="text-center pb-4">
+          <div className="flex items-center justify-center mb-3">
+            <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+              {currentStepData.icon}
+            </div>
+          </div>
+          <CardTitle className="text-xl mb-1">{currentStepData.title}</CardTitle>
+          <p className="text-sm text-muted-foreground">{currentStepData.description}</p>
+        </CardHeader>
+        
+        <CardContent className="space-y-4">
+          {/* Progress Bar */}
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Progress</span>
+              <span>{Math.round(progress)}% Complete</span>
+            </div>
+            <Progress value={progress} className="h-2" />
+          </div>
+
+          {/* Step Indicators */}
+          <div className="flex justify-center space-x-2">
+            {steps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  index === currentStep
+                    ? "bg-primary"
+                    : step.completed
+                    ? "bg-success"
+                    : "bg-muted"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Step Content */}
+          <div className="text-center space-y-4">
+            {currentStepData.id === "welcome" && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <Wallet className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <p className="text-sm">Payments</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-success/15 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <Coins className="w-6 h-6 text-success" />
+                    </div>
+                    <p className="text-sm">Convert</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-primary/15 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <TrendingUp className="w-6 h-6 text-primary" />
+                    </div>
+                    <p className="text-sm">Naira</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStepData.id === "connect-wallet" && !isConnected && (
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Use whichever wallet you already have. Browser wallets are
+                  detected automatically, and mobile wallets connect by
+                  scanning a QR code.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 border border-border rounded-lg">
+                    <p className="font-medium">MetaMask</p>
+                    <p className="text-xs text-muted-foreground">Browser &amp; mobile</p>
+                  </div>
+                  <div className="p-3 border border-border rounded-lg">
+                    <p className="font-medium">Coinbase Wallet</p>
+                    <p className="text-xs text-muted-foreground">Browser &amp; mobile</p>
+                  </div>
+                  <div className="p-3 border border-border rounded-lg">
+                    <p className="font-medium">Rainbow</p>
+                    <p className="text-xs text-muted-foreground">Mobile</p>
+                  </div>
+                  <div className="p-3 border border-border rounded-lg">
+                    <p className="font-medium">Any other wallet</p>
+                    <p className="text-xs text-muted-foreground">via WalletConnect</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStepData.id === "connect-wallet" && isConnected && (
+              <div className="space-y-4">
+                <div className="w-16 h-16 bg-success/15 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-8 h-8 text-success" />
+                </div>
+                <p className="text-success font-medium">Wallet Connected Successfully!</p>
+              </div>
+            )}
+
+            {currentStepData.id === "security" && (
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 gap-2 text-left">
+                  <div className="flex items-start gap-2 p-2 bg-success/10 rounded-lg">
+                    <CheckCircle className="w-4 h-4 text-success mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Non-Custodial</p>
+                      <p className="text-xs text-muted-foreground">You control your private keys</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 p-2 bg-success/10 rounded-lg">
+                    <CheckCircle className="w-4 h-4 text-success mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Self-custodial</p>
+                      <p className="text-xs text-muted-foreground">Your keys never leave your wallet</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 p-2 bg-success/10 rounded-lg">
+                    <CheckCircle className="w-4 h-4 text-success mt-0.5" />
+                    <div>
+                      <p className="font-medium text-sm">Audited Smart Contracts</p>
+                      <p className="text-xs text-muted-foreground">Professional security reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStepData.id === "features" && (
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 gap-2">
+                  <div className="p-3 border border-border rounded-lg text-left">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Zap className="w-4 h-4 text-blue-400" />
+                      <h4 className="font-medium text-sm">Instant Payments</h4>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Send money to friends or pay merchants instantly</p>
+                  </div>
+                  <div className="p-3 border border-border rounded-lg text-left">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Coins className="w-4 h-4 text-primary" />
+                      <h4 className="font-medium text-sm">Request payments</h4>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Share a QR code and get paid</p>
+                  </div>
+                  <div className="p-3 border border-border rounded-lg text-left">
+                    <div className="flex items-center gap-2 mb-1">
+                      <TrendingUp className="w-4 h-4 text-primary" />
+                      <h4 className="font-medium text-sm">Naira in and out</h4>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Buy with Naira and cash out to your bank</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-between pt-4">
+            <Button variant="outline" onClick={handleSkip}>
+              Skip Tour
+            </Button>
+            <div className="flex gap-2">
+              {currentStepData.action && !currentStepData.completed && (
+                <Button onClick={() => handleStepAction(currentStepData)}>
+                  {currentStepData.actionText}
+                </Button>
+              )}
+              <Button onClick={handleNext}>
+                {currentStep === steps.length - 1 ? "Get Started" : "Next"}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
