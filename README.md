@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/engipay.png" alt="NaijaPay" width="72" />
+<img src="public/najipay.png" alt="NaijaPay" width="72" />
 
 # NaijaPay 
 
@@ -81,8 +81,8 @@ NaijaPay/
 └── backend/               Rust workspace
     ├── crates/core/       assets, exact money, Stellar addresses
     ├── crates/ledger/     double-entry ledger rules
-    ├── crates/api/        HTTP API (engipay-api)
-    ├── crates/chain/      chain service (engipay-chain), Stellar client
+    ├── crates/api/        HTTP API (najipay-api)
+    ├── crates/chain/      chain service (najipay-chain), Stellar client
     └── migrations/        Postgres schema with append-only ledger guarantees
 ```
 ### Try a Stellar payment on testnet
@@ -107,7 +107,7 @@ curl http://127.0.0.1:8080/v1/assets
 Watch Stellar testnet deposits into a custody account:
 
 ```bash
-docker compose run --rm -e STELLAR_CUSTODY_ACCOUNT=G... toolbox cargo run -p engipay-chain
+docker compose run --rm -e STELLAR_CUSTODY_ACCOUNT=G... toolbox cargo run -p najipay-chain
 ```
 
 ## Testing

@@ -1,6 +1,6 @@
 //! Resolves a Stellar 64-bit muxed deposit ID to the internal user UUID.
 //!
-//! Each EngiPay user owns a unique `M...` deposit address whose embedded 64-bit
+//! Each NaijaPay user owns a unique `M...` deposit address whose embedded 64-bit
 //! ID maps to a row in `deposit_addresses`. This module queries that table and
 //! caches successful lookups so repeated deposit events for the same user do
 //! not hit the database on every poll.

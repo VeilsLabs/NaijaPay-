@@ -1,4 +1,4 @@
-# EngiPay Feature Mapping & Implementation Roadmap
+# NaijaPay Feature Mapping & Implementation Roadmap
 
 > **Branch**: `drips`  
 > **Source Plans**: [`PLAN.md`](PLAN.md), [`README.md`](README.md), [`backend/`](backend/)  
@@ -8,15 +8,15 @@
 
 ## 1. Executive Summary & Architecture Status
 
-EngiPay is a non-speculative, payment-first crypto platform tailored for Nigeria. It provides:
+NaijaPay is a non-speculative, payment-first crypto platform tailored for Nigeria. It provides:
 1. **Naira on-ramp and off-ramp** (NGN to/from USDC, ETH, BTC, XLM).
-2. **Scan to pay and receive** (SEP-7, EIP-681, BIP-21, and EngiPay envelopes).
+2. **Scan to pay and receive** (SEP-7, EIP-681, BIP-21, and NaijaPay envelopes).
 3. **Wallet-to-wallet transfers** on Base, Stellar, and Bitcoin.
 4. **Internal account funding, instant zero-fee transfers, and token conversions**.
 
 ### Current Working Baseline
 - **Frontend**: Next.js App Router, Tailwind CSS, wagmi/RainbowKit for Base, Freighter & WalletConnect for Stellar, QR scanner via `html5-qrcode`, payment URI encoder/decoder (`lib/payment-uri.ts`).
-- **Backend Core & Ledger**: Rust workspace, exact `Money` i128 representation, double-entry ledger engine (`engipay-ledger`), append-only PostgreSQL ledger triggers (`0001_ledger.sql`).
+- **Backend Core & Ledger**: Rust workspace, exact `Money` i128 representation, double-entry ledger engine (`najipay-ledger`), append-only PostgreSQL ledger triggers (`0001_ledger.sql`).
 - **Chain Service**: Stellar Horizon client, SEP-23 muxed address deposit parser, testnet transaction builder and signer.
 
 ---
@@ -40,12 +40,12 @@ Legend:
 | [x] | `DB-01` | Append-Only Ledger Schema | Table `ledger_transactions`, `ledger_postings`, `ledger_holds`, append-only triggers, zero-sum invariant check, and view `account_balances`. | `migrations/0001_ledger.sql` |
 | [ ] | `DB-02` | XLM Asset Support in Database | Update DB constraints in `ledger_postings` and `ledger_holds` to include `'XLM'` alongside `'ETH'`, `'USDC'`, `'BTC'`. | `migrations/0002_add_xlm.sql` |
 | [ ] | `DB-03` | Extended Entities Schema | Create schema for `user_profiles`, `deposit_addresses`, `bank_accounts`, `conversions`, `ramp_orders`, and `webhook_events`. | `migrations/0003_entities.sql` |
-| [ ] | `DB-04` | SQLx Ledger Store Implementation | Implement production database repository in `engipay-ledger` or `engipay-api` to persist entries via SQLx transactions. | `backend/crates/ledger/` |
+| [ ] | `DB-04` | SQLx Ledger Store Implementation | Implement production database repository in `najipay-ledger` or `najipay-api` to persist entries via SQLx transactions. | `backend/crates/ledger/` |
 | [ ] | `DB-05` | Balance Query & Reservation Service | Query available and held balances per user, place holds for in-flight withdrawals, settle or release holds. | `backend/crates/ledger/` |
 
 ---
 
-### Epic 2: API Service & Authentication (`engipay-api`)
+### Epic 2: API Service & Authentication (`najipay-api`)
 **Location**: [`backend/crates/api/`](backend/crates/api/)
 
 | Status | ID | Feature / Component | Description & Acceptance Criteria | Target |
@@ -57,12 +57,12 @@ Legend:
 | [ ] | `API-05` | Balances Endpoint | `GET /v1/balances`: Returns available and held balances across all 4 assets (USDC, XLM, ETH, BTC). | `crates/api/src/routes/balances.rs` |
 | [ ] | `API-06` | Unified Activity / History | `GET /v1/transactions`: Paginated unified ledger feed (deposits, transfers, withdrawals, swaps, ramps). | `crates/api/src/routes/transactions.rs` |
 | [ ] | `API-07` | Deposit Address Provisioning | `GET /v1/deposit-address?chain=stellar\|base\|bitcoin`: Return existing address or generate new address. | `crates/api/src/routes/deposits.rs` |
-| [ ] | `API-08` | Internal Transfers Endpoint | `POST /v1/transfers`: Instant P2P transfer between two EngiPay users with atomic balance debit/credit. | `crates/api/src/routes/transfers.rs` |
+| [ ] | `API-08` | Internal Transfers Endpoint | `POST /v1/transfers`: Instant P2P transfer between two NaijaPay users with atomic balance debit/credit. | `crates/api/src/routes/transfers.rs` |
 | [ ] | `API-09` | Payment Requests Endpoint | `POST /v1/payment-requests` & `GET /v1/payment-requests/:id`: Create/query invoice with standard URI + QR. | `crates/api/src/routes/requests.rs` |
 
 ---
 
-### Epic 3: Multi-Chain Custody & Deposits (`engipay-chain`)
+### Epic 3: Multi-Chain Custody & Deposits (`najipay-chain`)
 **Location**: [`backend/crates/chain/`](backend/crates/chain/)
 
 | Status | ID | Feature / Component | Description & Acceptance Criteria | Target |
@@ -140,10 +140,10 @@ Legend:
 | Status | ID | Feature / Component | Description & Acceptance Criteria | Target |
 | :---: | :---: | :--- | :--- | :--- |
 | [x] | `SCN-01` | Camera QR Scanner | Real camera scanner using `html5-qrcode` in `/scan`. | `components/payments/QRScanner.tsx` |
-| [x] | `SCN-02` | Multi-Format URI Parser | Full parser & serializer for EIP-681, BIP-21, SEP-7, and JSON `engipay.request`. | `lib/payment-uri.ts` |
+| [x] | `SCN-02` | Multi-Format URI Parser | Full parser & serializer for EIP-681, BIP-21, SEP-7, and JSON `najipay.request`. | `lib/payment-uri.ts` |
 | [x] | `SCN-03` | Standard Receive Codes | Generate QR codes on Base and Stellar with selectable asset and amount. | `app/(app)/receive/page.tsx` |
-| [ ] | `SCN-04` | Intelligent Payment Routing | When scanning: detect if address belongs to an EngiPay user -> trigger instant internal transfer; else prompt on-chain send. | `app/(app)/send/page.tsx` |
-| [ ] | `SCN-05` | Dual Payment Source Selector | Allow users on `/send` to choose paying from "Connected Wallet" (Freighter/MetaMask) or "EngiPay Balance". | `components/payments/SendPayment.tsx` |
+| [ ] | `SCN-04` | Intelligent Payment Routing | When scanning: detect if address belongs to an NaijaPay user -> trigger instant internal transfer; else prompt on-chain send. | `app/(app)/send/page.tsx` |
+| [ ] | `SCN-05` | Dual Payment Source Selector | Allow users on `/send` to choose paying from "Connected Wallet" (Freighter/MetaMask) or "NaijaPay Balance". | `components/payments/SendPayment.tsx` |
 
 ---
 
@@ -153,7 +153,7 @@ Legend:
 | Status | ID | Feature / Component | Description & Acceptance Criteria | Target |
 | :---: | :---: | :--- | :--- | :--- |
 | [x] | `FED-01` | App Shell & Wallet Navigation | App navigation, responsive layout, connect wallet sheet (EVM & Stellar), network indicator. | `app/(app)/layout.tsx` |
-| [ ] | `FED-02` | EngiPay Backend API Client | Strongly typed API client library for frontend to communicate with Axum backend. | `lib/api-client.ts` |
+| [ ] | `FED-02` | NaijaPay Backend API Client | Strongly typed API client library for frontend to communicate with Axum backend. | `lib/api-client.ts` |
 | [ ] | `FED-03` | Live Dashboard Balances | Connect Dashboard to `GET /v1/balances` to show custodial balance alongside connected wallet balances. | `app/(app)/dashboard/` |
 | [ ] | `FED-04` | Unified Activity Feed Component | Replace empty activity screen with infinite scrolling list from `GET /v1/transactions`. | `app/(app)/activity/` |
 | [ ] | `FED-05` | Bank Account Management UI | Add/remove verified Nigerian bank accounts in `/settings`. | `app/(app)/settings/` |
@@ -197,14 +197,14 @@ flowchart TD
 4. Implement `GET /v1/balances` and user session authentication.
 
 ### Phase 2: Deposit Pipeline & Custodial Crediting
-1. Connect `engipay-chain`'s Stellar Horizon watcher to the ledger store so incoming XLM/USDC deposits credit user balances.
+1. Connect `najipay-chain`'s Stellar Horizon watcher to the ledger store so incoming XLM/USDC deposits credit user balances.
 2. Expose `GET /v1/deposit-address` for users to view their muxed Stellar deposit address.
 3. Connect frontend Dashboard to display live custodial balances from the backend.
 
 ### Phase 3: Outflow & P2P Transfers
-1. Build internal EngiPay-to-EngiPay transfer endpoint (`POST /v1/transfers`) with zero fees.
+1. Build internal NaijaPay-to-NaijaPay transfer endpoint (`POST /v1/transfers`) with zero fees.
 2. Implement Stellar withdrawal execution (`POST /v1/withdrawals`) with ledger hold -> broadcast -> settle.
-3. Update `/send` UI to support choosing payment source (Wallet vs EngiPay Balance) and route internal transfers.
+3. Update `/send` UI to support choosing payment source (Wallet vs NaijaPay Balance) and route internal transfers.
 
 ### Phase 4: Token Conversion & Activity
 1. Implement quote engine and order execution for token swaps.

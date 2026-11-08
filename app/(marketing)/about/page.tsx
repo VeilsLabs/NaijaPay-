@@ -5,9 +5,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "About - EngiPay",
+  title: "About - NaijaPay",
   description:
-    "EngiPay is a Nigerian crypto payments app: send and receive, pay by code, and move money between crypto and Naira.",
+    "NaijaPay is a Nigerian crypto payments app: send and receive, pay by code, and move money between crypto and Naira.",
 }
 
 const VALUES = [
@@ -33,7 +33,7 @@ export default function AboutPage() {
     <>
       <MarketingHero
         title="About"
-        highlight="EngiPay"
+        highlight="NaijaPay"
         description="A payments app that connects crypto and the Naira, so money can move in and out of Nigeria without a maze of steps."
       />
 
@@ -47,7 +47,7 @@ export default function AboutPage() {
             address between apps.
           </p>
           <p className="leading-relaxed text-muted-foreground">
-            EngiPay does four things: buy and sell crypto for Naira, pay and get paid by scanning
+            NaijaPay does four things: buy and sell crypto for Naira, pay and get paid by scanning
             a code, send Bitcoin wallet to wallet, and hold and convert what you own in one
             place. Nothing else, until those four are genuinely good.
           </p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-semibold tracking-tight">Where we are</h2>
           <p className="mx-auto mb-8 max-w-xl leading-relaxed text-muted-foreground">
-            EngiPay is in active development. Wallet connection, balances, sending on Base and
+            NaijaPay is in active development. Wallet connection, balances, sending on Base and
             payment codes work today. Naira conversion, Bitcoin sending and history are being
             built.
           </p>

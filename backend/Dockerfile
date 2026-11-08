@@ -1,11 +1,11 @@
-# Builds one EngiPay binary. Choose it with --build-arg BIN=engipay-api (or engipay-chain).
+# Builds one NaijaPay binary. Choose it with --build-arg BIN=najipay-api (or najipay-chain).
 #
 # Compilation happens here, not on a developer machine: dependency build
 # scripts run inside this throwaway container, never next to wallets or keys.
 
 # Pinned, so every build uses the same compiler. Bump deliberately.
 FROM rust:1.98-bookworm AS build
-ARG BIN=engipay-api
+ARG BIN=najipay-api
 WORKDIR /src
 COPY . .
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
@@ -17,9 +17,9 @@ FROM debian:bookworm-slim
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
-    && useradd --system --uid 10001 --no-create-home engipay
+    && useradd --system --uid 10001 --no-create-home najipay
 COPY --from=build /app /usr/local/bin/app
 # Never run as root.
-USER engipay
+USER najipay
 EXPOSE 8080
 ENTRYPOINT ["/usr/local/bin/app"]

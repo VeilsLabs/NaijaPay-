@@ -9,7 +9,7 @@
 //! # Usage
 //!
 //! ```rust,ignore
-//! use engipay_api::middleware::recovery::CatchPanicLayer;
+//! use najipay_api::middleware::recovery::CatchPanicLayer;
 //!
 //! let app = Router::new()
 //!     .route("/", get(handler))

@@ -42,7 +42,7 @@ export default function ScanPage() {
     if (result.chain === "base" && !result.supportedNetwork) {
       toast({
         title: "Different network",
-        description: `This code is for network ${result.chainId}. EngiPay sends on Base only, so it cannot be paid here.`,
+        description: `This code is for network ${result.chainId}. NaijaPay sends on Base only, so it cannot be paid here.`,
         variant: "destructive",
       })
       return
@@ -61,7 +61,7 @@ export default function ScanPage() {
           description:
             result.asset === "USDC"
               ? `This asks for USDC from an issuer that is not Circle's on ${stellarNetwork.label}.`
-              : `EngiPay sends XLM and USDC on Stellar, not ${result.asset}.`,
+              : `NaijaPay sends XLM and USDC on Stellar, not ${result.asset}.`,
           variant: "destructive",
         })
         return
@@ -85,7 +85,7 @@ export default function ScanPage() {
       if (result.tokenAddress && tokenDecimals(result.tokenAddress) === undefined) {
         toast({
           title: "Token not supported",
-          description: "This code asks for a token EngiPay cannot send yet.",
+          description: "This code asks for a token NaijaPay cannot send yet.",
           variant: "destructive",
         })
         return
@@ -102,7 +102,7 @@ export default function ScanPage() {
     <div className="mx-auto max-w-lg">
       <PageHeader
         title="Scan to pay"
-        description="Scan a payment code from EngiPay or any other wallet, on Base or Stellar."
+        description="Scan a payment code from NaijaPay or any other wallet, on Base or Stellar."
       />
 
       <Card>

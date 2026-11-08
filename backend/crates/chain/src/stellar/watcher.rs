@@ -175,7 +175,7 @@ mod tests {
     use wiremock::{Mock, MockServer, ResponseTemplate};
 
     use crate::stellar::{StellarClient, StellarConfig, StellarNetwork};
-    use engipay_core::stellar::muxed_deposit_address;
+    use najipay_core::stellar::muxed_deposit_address;
 
     use super::*;
 

@@ -5,21 +5,21 @@
 #
 # Ports are bound to 127.0.0.1 only, so nothing is reachable from your network.
 
-name: engipay
+name: najipay
 
 services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-engipay}
+      POSTGRES_USER: ${POSTGRES_USER:-najipay}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in backend/.env}
-      POSTGRES_DB: ${POSTGRES_DB:-engipay}
+      POSTGRES_DB: ${POSTGRES_DB:-najipay}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-engipay} -d ${POSTGRES_DB:-engipay}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-najipay} -d ${POSTGRES_DB:-najipay}"]
       interval: 3s
       timeout: 3s
       retries: 20
@@ -28,9 +28,9 @@ services:
     build:
       context: .
       args:
-        BIN: engipay-api
+        BIN: najipay-api
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-engipay}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-engipay}
+      DATABASE_URL: postgres://${POSTGRES_USER:-najipay}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-najipay}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}
       BIND_ADDR: 0.0.0.0:8080
     ports:
@@ -50,7 +50,7 @@ services:
       - cargo-registry:/usr/local/cargo/registry
       - cargo-target:/work/target
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-engipay}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-engipay}
+      DATABASE_URL: postgres://${POSTGRES_USER:-najipay}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-najipay}
     profiles: ["tools"]
 
 volumes:

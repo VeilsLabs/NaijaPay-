@@ -29,7 +29,7 @@
 use axum::extract::{Query, State};
 use axum::routing::get;
 use axum::{Json, Router};
-use engipay_core::stellar::muxed_deposit_address;
+use najipay_core::stellar::muxed_deposit_address;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
@@ -834,8 +834,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn stellar_muxed_address_round_trips_through_account_resolver() {
-        use engipay_core::stellar::StellarAddress;
-        use engipay_core::stellar::parse_address;
+        use najipay_core::stellar::StellarAddress;
+        use najipay_core::stellar::parse_address;
 
         let pool = test_pool().await.unwrap();
         let custody = test_custody_account();

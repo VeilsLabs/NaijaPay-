@@ -1,6 +1,6 @@
 # Code of conduct
 
-EngiPay adopts the [Contributor Covenant, version 2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) as its code of conduct.
+NaijaPay adopts the [Contributor Covenant, version 2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) as its code of conduct.
 
 In short: be respectful, welcoming and patient. Harassment, personal attacks and discrimination are not tolerated in issues, pull requests, reviews or any other project space.
 

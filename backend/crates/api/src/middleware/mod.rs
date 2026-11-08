@@ -1,4 +1,4 @@
-//! HTTP middleware for engipay-api.
+//! HTTP middleware for najipay-api.
 
 pub mod logging;
 pub mod rate_limit;

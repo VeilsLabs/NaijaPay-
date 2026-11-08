@@ -1,4 +1,4 @@
-//! Domain types every EngiPay service agrees on.
+//! Domain types every NaijaPay service agrees on.
 //!
 //! Nothing here touches a database, a network or a key. That keeps the rules
 //! about money in one small place that is easy to test and hard to misuse.

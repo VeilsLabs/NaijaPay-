@@ -97,7 +97,7 @@ export function StellarSendPayment({
         <p className="font-semibold">Connect a Stellar wallet</p>
         <p className="max-w-sm text-sm text-muted-foreground">
           Sending XLM or USDC on Stellar is signed in your own wallet: the Freighter extension,
-          or Freighter mobile and LOBSTR on your phone. EngiPay never sees your key.
+          or Freighter mobile and LOBSTR on your phone. NaijaPay never sees your key.
         </p>
         <Button className="glow-button rounded-full" onClick={connectWallet}>
           Connect a Stellar wallet

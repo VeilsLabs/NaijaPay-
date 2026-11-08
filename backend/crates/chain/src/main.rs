@@ -1,7 +1,7 @@
-//! engipay-chain
+//! najipay-chain
 //!
-//!   engipay-chain                                   watch for deposits
-//!   engipay-chain stellar-send <to> <amount> <asset>  testnet payment
+//!   najipay-chain                                   watch for deposits
+//!   najipay-chain stellar-send <to> <amount> <asset>  testnet payment
 //!
 //! Configuration comes from the environment; see backend/.env.example.
 
@@ -10,13 +10,13 @@ use std::env;
 use std::time::Duration;
 
 use anyhow::{Context, bail};
-use engipay_chain::stellar::cursor::{CursorStore, STELLAR_CHAIN_KEY};
-use engipay_chain::stellar::horizon::cursor_for_ledger;
-use engipay_chain::stellar::payment::{LocalTestnetSigner, PaymentRequest, StellarSigner};
-use engipay_chain::stellar::{StellarClient, StellarConfig, StellarNetwork};
-use engipay_chain::{ChainClient, is_creditable};
-use engipay_core::stellar::{StellarAddress, parse_address};
-use engipay_core::{Asset, Money};
+use najipay_chain::stellar::cursor::{CursorStore, STELLAR_CHAIN_KEY};
+use najipay_chain::stellar::horizon::cursor_for_ledger;
+use najipay_chain::stellar::payment::{LocalTestnetSigner, PaymentRequest, StellarSigner};
+use najipay_chain::stellar::{StellarClient, StellarConfig, StellarNetwork};
+use najipay_chain::{ChainClient, is_creditable};
+use najipay_core::stellar::{StellarAddress, parse_address};
+use najipay_core::{Asset, Money};
 use sqlx::postgres::PgPoolOptions;
 use tracing::{info, warn};
 
@@ -195,7 +195,7 @@ async fn watch() -> anyhow::Result<()> {
 
 async fn stellar_send(args: &[String]) -> anyhow::Result<()> {
     let [destination, amount, asset] = args else {
-        bail!("usage: engipay-chain stellar-send <destination> <amount> <XLM|USDC>");
+        bail!("usage: najipay-chain stellar-send <destination> <amount> <XLM|USDC>");
     };
     let client = stellar_client()?
         .context("set STELLAR_CUSTODY_ACCOUNT (and STELLAR_NETWORK=testnet) first")?;

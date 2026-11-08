@@ -1,4 +1,4 @@
-EngiPay - Product and Technical Plan (v2)
+NaijaPay - Product and Technical Plan (v2)
 
 Written 12 September 2026. Owner: adenueltech.
 This replaces the Starknet and DeFi direction.
@@ -15,19 +15,19 @@ These four are the product. Nothing else ships.
 
 1.2 Scan to pay and scan to receive
     Show a QR code to get paid. Scan someone's QR code to pay them. Works
-    between two EngiPay users, and with any outside wallet that reads standard
+    between two NaijaPay users, and with any outside wallet that reads standard
     payment codes.
 
 1.3 BTC transfers, wallet to wallet
-    Plain Bitcoin sending. A user sends BTC from their EngiPay balance to any
-    Bitcoin address, and receives BTC from anywhere into their EngiPay address.
+    Plain Bitcoin sending. A user sends BTC from their NaijaPay balance to any
+    Bitcoin address, and receives BTC from anywhere into their NaijaPay address.
     Real Bitcoin on the Bitcoin network, not a wrapped token.
 
-1.4 Add a wallet, fund EngiPay, then send or convert
+1.4 Add a wallet, fund NaijaPay, then send or convert
     A user connects their own external wallet (MetaMask, Trust, Coinbase
-    Wallet), moves funds into their EngiPay account, and from inside EngiPay
+    Wallet), moves funds into their NaijaPay account, and from inside NaijaPay
     they can:
-      - send to any other wallet address, EngiPay or not
+      - send to any other wallet address, NaijaPay or not
       - convert one token into another, for example USDC to ETH, or BTC to USDC
       - withdraw back out to their own external wallet at any time
 
@@ -56,7 +56,7 @@ These four are the product. Nothing else ships.
 2.3 Scan to pay
     The receiver opens Receive, optionally types an amount and picks an asset,
     and gets a QR code. The sender scans it, sees who they are paying and how
-    much, and confirms. If both users are on EngiPay the transfer is an internal
+    much, and confirms. If both users are on NaijaPay the transfer is an internal
     ledger move: instant, no network fee, no waiting for confirmations. If the
     code belongs to an outside wallet it becomes a normal on-chain send.
 
@@ -75,7 +75,7 @@ These four are the product. Nothing else ships.
 2.5 On-ramp, Naira in
     The user enters a Naira amount, gets a quote, completes KYC if it is their
     first time, and pays by bank transfer or card. The provider confirms payment
-    and the crypto lands in the user's EngiPay balance.
+    and the crypto lands in the user's NaijaPay balance.
 
 2.6 Off-ramp, Naira out
     The user picks an asset and amount, gets a quote, and confirms. The balance
@@ -97,11 +97,11 @@ These four are the product. Nothing else ships.
 
 3. WHAT CUSTODY MEANS FOR US
 
-Feature 1.4 means EngiPay holds customer funds. That decision drives everything
+Feature 1.4 means NaijaPay holds customer funds. That decision drives everything
 else in this document, so it is worth stating plainly.
 
 What it gives us:
-    Instant EngiPay-to-EngiPay payments with no gas fee, in-app conversion,
+    Instant NaijaPay-to-NaijaPay payments with no gas fee, in-app conversion,
     simple recovery when a user loses their phone, and a normal fintech
     experience for people who do not want to manage a seed phrase.
 
@@ -138,9 +138,9 @@ a real project each time, the way Bitcoin is.
 
 Why Stellar was added:
     Stellar was built for cross-border payments and for local-currency on and
-    off ramps through regulated partners called anchors, which is EngiPay's
+    off ramps through regulated partners called anchors, which is NaijaPay's
     Naira problem. Its smart contracts (Soroban) are written in Rust, matching
-    the backend. It also makes EngiPay eligible for the Drips Stellar Wave, the
+    the backend. It also makes NaijaPay eligible for the Drips Stellar Wave, the
     open-source funding program this project is aiming for (section 15).
 
 One balance per currency, whichever network it came from:
@@ -161,7 +161,7 @@ Precision rule (money correctness):
 
     A withdrawal to a coarser network must be exactly representable there. An
     amount like 0.0000001 USDC cannot be sent on Base, and it is refused rather
-    than silently trimmed. This lives in engipay-core (Money::to_network_units).
+    than silently trimmed. This lives in najipay-core (Money::to_network_units).
 
 Stellar deposit addresses:
     One custody account, with a distinct muxed address (SEP-23, "M...") per user.
@@ -230,14 +230,14 @@ The chain service stays small on purpose. Everything it exposes:
 Repository layout. The web app stays at the root for now; the backend is one
 Cargo workspace beside it:
 
-    engipay/
+    najipay/
       app/, components/, lib/   the Next.js web app
       backend/
         Cargo.toml              workspace; every dependency declared once
         crates/core/            assets, exact money, identifiers
         crates/ledger/          double-entry ledger rules
-        crates/api/             Axum HTTP API (binary: engipay-api)
-        crates/chain/           chain service (binary: engipay-chain)
+        crates/api/             Axum HTTP API (binary: najipay-api)
+        crates/chain/           chain service (binary: najipay-chain)
         migrations/             Postgres schema, applied at API startup
         Dockerfile              builds either binary
         docker-compose.yml      Postgres, the API, and a Rust toolbox
@@ -249,7 +249,7 @@ Decided on 15 September 2026: Rust for both the API and the chain service.
 
 What that means in practice:
     One language, one Cargo workspace, and one set of domain types
-    (engipay-core) shared by the API and the chain service. The money type and
+    (najipay-core) shared by the API and the chain service. The money type and
     the ledger rules exist exactly once, and both services use the same code.
 
     The API is Axum on Tokio, with SQLx on Postgres. The chain service is a
@@ -281,7 +281,7 @@ Guardrails from day one:
 
 7. QR CODE FORMAT
 
-Use the standard EIP-681 format so that any wallet, not just EngiPay, can read
+Use the standard EIP-681 format so that any wallet, not just NaijaPay, can read
 our codes:
 
     ethereum:0x<address>@8453
@@ -291,12 +291,12 @@ Bitcoin uses the BIP-21 standard:
 
     bitcoin:<address>?amount=0.0015
 
-For EngiPay-to-EngiPay payments we wrap the standard code so we can carry a
+For NaijaPay-to-NaijaPay payments we wrap the standard code so we can carry a
 note, a reference and the user's tag, while staying readable to outside wallets:
 
     {
       "v": 1,
-      "type": "engipay.request",
+      "type": "najipay.request",
       "chain": "base",
       "to": "0x...",
       "asset": "USDC",
@@ -307,7 +307,7 @@ note, a reference and the user's tag, while staying readable to outside wallets:
     }
 
 The uri field is never optional. It is what makes the code work in wallets that
-have never heard of EngiPay. The scanner reads JSON first, then EIP-681, then
+have never heard of NaijaPay. The scanner reads JSON first, then EIP-681, then
 BIP-21, then a bare address.
 
 
@@ -325,7 +325,7 @@ BIP-21, then a bare address.
 
     GET  /deposit-address            per chain, created on first request
     POST /withdrawals                send out to an external address
-    POST /transfers                  internal EngiPay to EngiPay transfer
+    POST /transfers                  internal NaijaPay to NaijaPay transfer
 
     POST /payment-requests           create a QR request, returns uri and qr
     GET  /payment-requests/:id
@@ -404,7 +404,7 @@ Everything here needs the backend, so the backend comes first.
     2. Chain service and deposits
        Rust service, EVM and Bitcoin wallets, deposit addresses, watching for
        incoming funds, crediting the ledger. At this point a user can fund an
-       EngiPay account from an outside wallet.
+       NaijaPay account from an outside wallet.
        Stellar started 16 September 2026: Horizon client, deposit watching into
        muxed addresses (successful payments of XLM, or USDC from Circle's
        issuer only), payment building and signing with the SDF's stellar-xdr,
@@ -412,8 +412,8 @@ Everything here needs the backend, so the backend comes first.
        Postgres ledger waits for the ledger store.
 
     3. Sending out
-       Withdrawals to external addresses on both chains, plus internal EngiPay
-       to EngiPay transfers. Now money moves in both directions.
+       Withdrawals to external addresses on both chains, plus internal NaijaPay
+       to NaijaPay transfers. Now money moves in both directions.
 
     4. Scan to pay and receive
        Receive screen with the QR code, scanner that reads all four formats,
@@ -488,7 +488,7 @@ Working for real today, with no backend:
     A real QR scanner. The old one was a placeholder that always returned
     nothing, so scanning never worked. It now uses html5-qrcode.
     Payment codes, read and written, in lib/payment-uri.ts: EIP-681, BIP-21,
-    the EngiPay envelope, and bare addresses
+    the NaijaPay envelope, and bare addresses
     The receive screen renders a standard code, so other wallets can pay it
     Stellar through Freighter (16 September 2026): connect, balances with the
     account reserve worked out, and sends of XLM and USDC with memos, muxed
@@ -530,7 +530,7 @@ lib/api-config.ts. Nothing in the app imports them any more.
 
 15. DRIPS WAVE
 
-Goal, set 16 September 2026: list EngiPay in the Drips Wave, the open-source
+Goal, set 16 September 2026: list NaijaPay in the Drips Wave, the open-source
 funding program at https://docs.drips.network/wave.
 
 What Wave is:
@@ -541,7 +541,7 @@ What Wave is:
     Rewards are split by share of points and paid in the organiser's token.
     Contributors must pass KYC; maintainers verify a phone number.
 
-The program EngiPay can join:
+The program NaijaPay can join:
     As of 16 September 2026 the only Wave Program is the Stellar Wave: $75,000
     per wave, 737 repositories across 443 organisations, monthly, with Wave 9
     on 23 to 30 September. Maintainers are told to apply only to programs
@@ -552,7 +552,7 @@ The program EngiPay can join:
 The Drips SDK is not used:
     It is a TypeScript library for funding open-source projects (Drip Lists,
     donation streams) on Ethereum, OP Mainnet and Filecoin. It adds nothing for
-    EngiPay's users. Optionally, a FUNDING.json at the repository root lets the
+    NaijaPay's users. Optionally, a FUNDING.json at the repository root lets the
     project receive Drips donations.
 
 Readiness checklist, in order, with status on 16 September 2026:

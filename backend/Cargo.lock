@@ -482,7 +482,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "engipay-api"
+name = "najipay-api"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -490,8 +490,8 @@ dependencies = [
  "chrono",
  "ed25519-dalek",
  "elliptic-curve",
- "engipay-core",
- "engipay-ledger",
+ "najipay-core",
+ "najipay-ledger",
  "hex",
  "http-body-util",
  "jsonwebtoken",
@@ -514,12 +514,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "engipay-chain"
+name = "najipay-chain"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "ed25519-dalek",
- "engipay-core",
+ "najipay-core",
  "lru",
  "reqwest",
  "serde",
@@ -538,7 +538,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "engipay-core"
+name = "najipay-core"
 version = "0.1.0"
 dependencies = [
  "serde",
@@ -549,11 +549,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "engipay-ledger"
+name = "najipay-ledger"
 version = "0.1.0"
 dependencies = [
  "chrono",
- "engipay-core",
+ "najipay-core",
  "serde",
  "sqlx",
  "thiserror",

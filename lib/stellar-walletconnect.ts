@@ -3,7 +3,7 @@
  *
  * Mobile wallets (Freighter mobile, LOBSTR and others) are separate apps, so a
  * mobile browser cannot see them the way a desktop browser sees the Freighter
- * extension. They connect through WalletConnect instead: EngiPay shows a code
+ * extension. They connect through WalletConnect instead: NaijaPay shows a code
  * or opens the wallet app, the user approves, and signing requests travel over
  * WalletConnect's relay. The key never leaves the wallet.
  *
@@ -19,7 +19,7 @@ import { stellarNetwork } from "@/lib/stellar"
 
 export const WALLETCONNECT_PROJECT_ID = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? ""
 
-/** WalletConnect's name for the Stellar network EngiPay is on. */
+/** WalletConnect's name for the Stellar network NaijaPay is on. */
 export const STELLAR_WC_CHAIN = `stellar:${stellarNetwork.name === "mainnet" ? "pubnet" : "testnet"}`
 
 const METHODS = ["stellar_signXDR"]
@@ -51,12 +51,12 @@ export function getStellarSignClient(): Promise<SignClient> {
       .then(({ default: Client }) =>
         Client.init({
           projectId: WALLETCONNECT_PROJECT_ID,
-          customStoragePrefix: "engipay-stellar",
+          customStoragePrefix: "najipay-stellar",
           metadata: {
-            name: "EngiPay",
+            name: "NaijaPay",
             description: "Pay and get paid in crypto from Nigeria",
             url: window.location.origin,
-            icons: [`${window.location.origin}/engipay.png`],
+            icons: [`${window.location.origin}/najipay.png`],
           },
         })
       )

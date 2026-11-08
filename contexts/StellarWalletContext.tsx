@@ -17,7 +17,7 @@ import {
 } from "@/lib/stellar-walletconnect"
 
 /** Remembers that the user connected the Freighter extension, so a reload reconnects quietly. */
-const CONNECTED_KEY = "engipay-stellar-connected"
+const CONNECTED_KEY = "najipay-stellar-connected"
 
 export type StellarConnectResult = "connected" | "not-installed" | "cancelled"
 
@@ -48,7 +48,7 @@ interface StellarWalletContextType {
   /** False when the site has no WalletConnect project id, so phone wallets cannot connect. */
   walletConnectAvailable: boolean
   /**
-   * Set when the wallet is on a different Stellar network than EngiPay. Sending
+   * Set when the wallet is on a different Stellar network than NaijaPay. Sending
    * is blocked until it matches: a testnet payment signed for mainnet is invalid.
    */
   networkMismatch: string | null
@@ -92,7 +92,7 @@ function mismatchMessage(walletNetwork: string) {
 /**
  * The Stellar side of the wallet. On desktop, the Freighter extension. On
  * phones, and for LOBSTR and other wallets, WalletConnect. Either way the key
- * never leaves the wallet: EngiPay builds the payment, the wallet signs it.
+ * never leaves the wallet: NaijaPay builds the payment, the wallet signs it.
  */
 export function StellarWalletProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient()
@@ -211,7 +211,7 @@ export function StellarWalletProvider({ children }: { children: ReactNode }) {
       const { session } = connection
       void walletConnect().then(({ disconnectWalletConnect }) => disconnectWalletConnect(session))
     }
-    // Freighter's extension has no "disconnect"; EngiPay forgets the account.
+    // Freighter's extension has no "disconnect"; NaijaPay forgets the account.
     setStellarAddress(null)
     setConnection(null)
     setNetworkMismatch(null)

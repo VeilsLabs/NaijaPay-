@@ -1,5 +1,5 @@
 [package]
-name = "engipay-chain"
+name = "najipay-chain"
 description = "Chain service: deposit watching, transaction building and signing. The only service that ever holds keys."
 version.workspace = true
 edition.workspace = true
@@ -8,7 +8,7 @@ license.workspace = true
 publish.workspace = true
 
 [dependencies]
-engipay-core.workspace = true
+najipay-core.workspace = true
 anyhow.workspace = true
 ed25519-dalek.workspace = true
 lru.workspace = true

@@ -149,7 +149,7 @@ export default function Hero({ onGetStarted }: HeroProps) {
                 <div className="relative mx-auto aspect-[3/4] w-full max-w-[380px]">
                   <Image
                     src="/phone.png"
-                    alt="The EngiPay app on a phone"
+                    alt="The NaijaPay app on a phone"
                     fill
                     priority
                     className="object-contain drop-shadow-[0_30px_60px_hsl(150_40%_3%/0.6)]"

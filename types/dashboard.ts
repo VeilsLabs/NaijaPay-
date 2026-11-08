@@ -11,7 +11,7 @@ export interface Balance {
 
 export interface Activity {
   id: number
-  /** The four things money can do in EngiPay. */
+  /** The four things money can do in NaijaPay. */
   type: "payment" | "convert" | "deposit" | "withdrawal"
   description: string
   amount: string

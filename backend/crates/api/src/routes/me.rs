@@ -2,7 +2,7 @@ use thiserror::Error;
 
 /// Reserved system handles a user may never claim as their own tag.
 #[allow(dead_code)] // wired up with PATCH /v1/me; see #111 and #112
-const RESERVED_TAGS: [&str; 5] = ["admin", "engipay", "support", "system", "help"];
+const RESERVED_TAGS: [&str; 5] = ["admin", "najipay", "support", "system", "help"];
 
 #[allow(dead_code)] // wired up with PATCH /v1/me; see #111 and #112
 #[derive(Debug, Error, PartialEq, Eq)]

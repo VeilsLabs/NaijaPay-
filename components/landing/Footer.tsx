@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 text-xl font-bold text-foreground">
               <Image src="/logo.svg" alt="" width={24} height={24} aria-hidden="true" />
-              EngiPay
+              NaijaPay
             </div>
             <p className="mt-4 max-w-[420px] leading-relaxed text-muted-foreground">
               Crypto payments for Nigeria. Send and receive, pay by scanning a code, and move
@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <p>&copy; {currentYear} EngiPay. All rights reserved.</p>
+          <p>&copy; {currentYear} NaijaPay. All rights reserved.</p>
           <p>Built in Nigeria.</p>
         </div>
       </div>

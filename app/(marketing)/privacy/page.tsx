@@ -4,8 +4,8 @@ import { Eye, Lock, UserCheck, Share2 } from "lucide-react"
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "Privacy - EngiPay",
-  description: "What EngiPay collects, why, who it is shared with, and the choices you have.",
+  title: "Privacy - NaijaPay",
+  description: "What NaijaPay collects, why, who it is shared with, and the choices you have.",
 }
 
 const LAST_UPDATED = "12 September 2026"
@@ -19,7 +19,7 @@ const PRINCIPLES = [
   {
     icon: Lock,
     title: "We never hold your seed phrase",
-    body: "EngiPay does not ask for it and cannot use it. Anyone who asks you for it is not us.",
+    body: "NaijaPay does not ask for it and cannot use it. Anyone who asks you for it is not us.",
   },
   {
     icon: UserCheck,
@@ -90,7 +90,7 @@ const SECTIONS: Section[] = [
       "These are the measures actually in place. We will update this list as the service grows rather than claim protections we have not built.",
     ],
     items: [
-      { text: "All traffic between your device and EngiPay is encrypted in transit (HTTPS)." },
+      { text: "All traffic between your device and NaijaPay is encrypted in transit (HTTPS)." },
       { text: "Any signing key sits in a separate, isolated service, never in the app or the main API." },
       { text: "Access to production data is limited to the people who need it, and is logged." },
       { text: "Large withdrawals require a second approval before they are released." },
@@ -169,8 +169,8 @@ export default function PrivacyPage() {
             <h2 className="mb-4 text-xl font-semibold tracking-tight">Contact us</h2>
             <p className="mb-4 leading-relaxed text-muted-foreground">
               For any question about this policy, or to exercise the rights above, email{" "}
-              <a href="mailto:privacy@engipay.com" className="text-primary hover:underline">
-                privacy@engipay.com
+              <a href="mailto:privacy@najipay.com" className="text-primary hover:underline">
+                privacy@najipay.com
               </a>
               .
             </p>

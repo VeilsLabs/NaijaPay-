@@ -1,12 +1,12 @@
 {
-  "name": "engipay",
+  "name": "najipay",
   "version": "0.1.0",
   "description": "Pay and get paid in crypto from Nigeria: Naira on and off ramps, scan to pay, and transfers on Base, Stellar and Bitcoin.",
   "license": "Apache-2.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/The-Engineer-Network/engipay.git"
+    "url": "https://github.com/The-Engineer-Network/najipay.git"
   },
   "engines": {
     "node": ">=20.9"

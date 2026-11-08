@@ -1,4 +1,4 @@
-//! EngiPay HTTP API.
+//! NaijaPay HTTP API.
 //!
 //! Routes live here rather than in `main.rs` so tests can drive the real router
 //! without opening a socket.

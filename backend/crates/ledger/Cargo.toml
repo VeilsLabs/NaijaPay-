@@ -1,5 +1,5 @@
 [package]
-name = "engipay-ledger"
+name = "najipay-ledger"
 description = "Double-entry ledger: who owns what, and every movement that got them there."
 version.workspace = true
 edition.workspace = true
@@ -12,7 +12,7 @@ default = []
 postgres = ["dep:sqlx", "dep:tokio", "dep:tracing", "dep:chrono"]
 
 [dependencies]
-engipay-core.workspace = true
+najipay-core.workspace = true
 serde.workspace = true
 thiserror.workspace = true
 uuid.workspace = true

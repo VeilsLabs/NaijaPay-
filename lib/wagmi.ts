@@ -83,7 +83,7 @@ const wallets = [
  * for mobile, Coinbase Wallet and Safe.
  */
 export const wagmiConfig = getDefaultConfig({
-  appName: "EngiPay",
+  appName: "NaijaPay",
   projectId: projectId || "00000000000000000000000000000000",
   chains: [activeChain],
   wallets,

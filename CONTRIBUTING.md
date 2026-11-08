@@ -1,6 +1,6 @@
-# Contributing to EngiPay
+# Contributing to NaijaPay
 
-Thanks for helping. EngiPay moves people's money, so this guide is mostly about the few rules that keep it safe. Everything else is ordinary open-source practice.
+Thanks for helping. NaijaPay moves people's money, so this guide is mostly about the few rules that keep it safe. Everything else is ordinary open-source practice.
 
 ## Ways to help
 
@@ -13,7 +13,7 @@ Comment on an issue before starting work on it, so two people do not build the s
 
 ## Scope
 
-EngiPay does four things: Naira on and off ramps, scan to pay and receive, wallet to wallet transfers, and funding EngiPay to send or convert. It runs on Stellar, Base and Bitcoin.
+NaijaPay does four things: Naira on and off ramps, scan to pay and receive, wallet to wallet transfers, and funding NaijaPay to send or convert. It runs on Stellar, Base and Bitcoin.
 
 Out of scope: lending, staking, yield, trading features, NFTs, and new chains. [PLAN.md](PLAN.md) explains why and is the source of truth.
 
@@ -93,9 +93,9 @@ Keep pull requests small and about one thing. Fill in the template, including ho
 
 ### Money
 
-- **Never use floating point for money.** Backend amounts are whole smallest units in `i128` (`engipay_core::Money`). Frontend amounts stay as decimal strings or `bigint` until the moment they are formatted for display.
+- **Never use floating point for money.** Backend amounts are whole smallest units in `i128` (`najipay_core::Money`). Frontend amounts stay as decimal strings or `bigint` until the moment they are formatted for display.
 - **Refuse, do not round.** An amount with more decimals than the asset supports is an error the user sees, not something silently trimmed.
-- **Validate addresses fully**, checksum included, before anything is signed. Stellar addresses go through `isStellarAddress` on the web and `engipay_core::stellar::parse_address` on the backend.
+- **Validate addresses fully**, checksum included, before anything is signed. Stellar addresses go through `isStellarAddress` on the web and `najipay_core::stellar::parse_address` on the backend.
 - **Only real assets.** A token is identified by its issuer or contract address, never by its name. Anyone can issue a token called USDC.
 - **Every ledger change balances and is idempotent.** Use the ledger crate. Do not write to ledger tables directly.
 
@@ -111,7 +111,7 @@ Keep pull requests small and about one thing. Fill in the template, including ho
 - **Install with `--ignore-scripts`.** Dependency install scripts do not run in CI, and should not run on your machine either.
 - **Lockfile changes get read in review.** Do not commit an unrelated lockfile churn.
 
-EngiPay's own repository was compromised through a malicious build config in 2026. These rules exist because of that.
+NaijaPay's own repository was compromised through a malicious build config in 2026. These rules exist because of that.
 
 ## Code style
 
@@ -144,7 +144,7 @@ A maintainer reviews every pull request. The `main` branch is protected: changes
 
 ## License
 
-EngiPay is licensed under the [Apache License 2.0](LICENSE). By contributing, you agree that your contribution is licensed under the same terms.
+NaijaPay is licensed under the [Apache License 2.0](LICENSE). By contributing, you agree that your contribution is licensed under the same terms.
 
 ## Conduct
 

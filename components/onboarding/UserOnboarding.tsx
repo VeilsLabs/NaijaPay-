@@ -36,7 +36,7 @@ export function UserOnboarding() {
 
   useEffect(() => {
     // Check if user has completed onboarding
-    const hasCompletedOnboarding = localStorage.getItem("engipay-onboarding-completed")
+    const hasCompletedOnboarding = localStorage.getItem("najipay-onboarding-completed")
     if (!hasCompletedOnboarding && !isConnected) {
       setShowOnboarding(true)
     }
@@ -45,7 +45,7 @@ export function UserOnboarding() {
   const steps: OnboardingStep[] = [
     {
       id: "welcome",
-      title: "Welcome to EngiPay",
+      title: "Welcome to NaijaPay",
       description: "Crypto payments and Naira cash-out in one app. Let's get you started with a quick tour.",
       icon: <Zap className="w-8 h-8" />,
       completed: true,
@@ -53,7 +53,7 @@ export function UserOnboarding() {
     {
       id: "connect-wallet",
       title: "Connect Your Wallet",
-      description: "Connect any Web3 wallet to start using EngiPay — MetaMask, Rainbow, Coinbase Wallet, or any mobile wallet via WalletConnect.",
+      description: "Connect any Web3 wallet to start using NaijaPay — MetaMask, Rainbow, Coinbase Wallet, or any mobile wallet via WalletConnect.",
       icon: <Wallet className="w-8 h-8" />,
       completed: isConnected,
       action: () => connectWallet(),
@@ -90,10 +90,10 @@ export function UserOnboarding() {
   }
 
   const completeOnboarding = () => {
-    localStorage.setItem("engipay-onboarding-completed", "true")
+    localStorage.setItem("najipay-onboarding-completed", "true")
     setShowOnboarding(false)
     toast({
-      title: "Welcome to EngiPay!",
+      title: "Welcome to NaijaPay!",
       description: "You're all set to start sending, receiving and converting.",
     })
   }

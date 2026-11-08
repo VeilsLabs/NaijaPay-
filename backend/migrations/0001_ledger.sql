@@ -1,6 +1,6 @@
--- EngiPay ledger schema.
+-- NaijaPay ledger schema.
 --
--- The database enforces the same rules as engipay-ledger, so a bug in the
+-- The database enforces the same rules as najipay-ledger, so a bug in the
 -- application cannot write a corrupt ledger:
 --   * ledger rows are append-only: UPDATE and DELETE are refused
 --   * every transaction balances to zero per asset, checked at COMMIT

@@ -1,11 +1,11 @@
 //! Building and signing Stellar payments.
 //!
 //! Transactions are built directly from the Stellar Development Foundation's
-//! XDR definitions (`stellar-xdr`), so what EngiPay signs is exactly what the
+//! XDR definitions (`stellar-xdr`), so what NaijaPay signs is exactly what the
 //! network verifies.
 
-use engipay_core::stellar::{StellarAddress, StellarAddressError, parse_address};
-use engipay_core::{Asset, Chain, Money};
+use najipay_core::stellar::{StellarAddress, StellarAddressError, parse_address};
+use najipay_core::{Asset, Chain, Money};
 use stellar_xdr::{
     AccountId, AlphaNum4, AssetCode4, DecoratedSignature, Limits, Memo, MuxedAccount,
     MuxedAccountMed25519, Operation, OperationBody, PaymentOp, Preconditions, PublicKey,
@@ -292,7 +292,7 @@ mod tests {
     #[test]
     fn pays_a_muxed_address_with_its_id() {
         let custody = account(9);
-        let muxed = engipay_core::stellar::muxed_deposit_address(&custody, 777).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&custody, 777).unwrap();
         let tx = build_payment(
             &signer().public_key(),
             1,

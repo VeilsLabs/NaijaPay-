@@ -4,7 +4,7 @@
 //! Foundation, rather than a hand-written base32 and checksum: the rules that
 //! decide where money goes should be the network's own.
 //!
-//! EngiPay receives Stellar deposits on muxed accounts (SEP-23). One custody
+//! NaijaPay receives Stellar deposits on muxed accounts (SEP-23). One custody
 //! account gets a distinct `M...` address per user, so a deposit is credited
 //! to the right person without relying on the sender remembering a memo.
 
@@ -77,7 +77,7 @@ pub fn muxed_deposit_address(base_account: &str, id: u64) -> Result<String, Stel
 }
 
 /// stellar-strkey encodes into fixed-size, allocation-free strings; the rest of
-/// EngiPay uses ordinary owned strings.
+/// NaijaPay uses ordinary owned strings.
 fn owned(text: &str) -> String {
     text.to_owned()
 }

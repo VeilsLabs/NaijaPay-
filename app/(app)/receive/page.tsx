@@ -108,7 +108,7 @@ export default function ReceivePage() {
       return
     }
     try {
-      await navigator.share({ title: "EngiPay request", text: paymentUri })
+      await navigator.share({ title: "NaijaPay request", text: paymentUri })
     } catch {
       // The user dismissed the share sheet.
     }
@@ -255,7 +255,7 @@ export default function ReceivePage() {
 
           <p className="text-xs text-muted-foreground">
             This code follows the standard payment format for {networkLabel}, so other wallets can
-            pay it too, not only EngiPay.
+            pay it too, not only NaijaPay.
           </p>
         </CardContent>
       </Card>

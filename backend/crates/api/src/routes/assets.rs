@@ -1,6 +1,6 @@
 use axum::routing::get;
 use axum::{Json, Router};
-use engipay_core::{Asset, Chain};
+use najipay_core::{Asset, Chain};
 use serde::Serialize;
 
 use crate::AppState;
@@ -26,7 +26,7 @@ pub struct NetworkInfo {
     pub decimals: u32,
 }
 
-/// The assets EngiPay supports, from the single definition in `engipay-core`,
+/// The assets NaijaPay supports, from the single definition in `najipay-core`,
 /// so the app never shows an asset or network the backend cannot move.
 async fn list_assets() -> Json<Vec<AssetInfo>> {
     Json(

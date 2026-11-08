@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Convert - EngiPay",
+  title: "Convert - NaijaPay",
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

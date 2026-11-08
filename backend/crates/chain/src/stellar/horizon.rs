@@ -9,7 +9,7 @@
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
-use engipay_core::{Asset, Chain, Money};
+use najipay_core::{Asset, Chain, Money};
 use serde::Deserialize;
 
 use super::network::StellarNetwork;
@@ -172,7 +172,7 @@ pub enum Skipped {
     /// Outgoing, or not a payment at all (e.g. account creation or a trustline).
     NotIncoming,
     Failed,
-    /// A token EngiPay does not hold, including fake USDC from another issuer.
+    /// A token NaijaPay does not hold, including fake USDC from another issuer.
     /// This is a security-sensitive rejection: unauthorized assets must be recorded.
     UnsupportedAsset {
         code: String,
@@ -303,8 +303,8 @@ pub fn cursor_for_ledger(ledger: u64) -> Option<i64> {
 /// embedded ID and must be flagged for memo parsing or manual review) or for
 /// any invalid input.
 pub fn extract_muxed_id(destination: &str) -> Option<u64> {
-    match engipay_core::stellar::parse_address(destination) {
-        Ok(engipay_core::stellar::StellarAddress::Muxed { id, .. }) => Some(id),
+    match najipay_core::stellar::parse_address(destination) {
+        Ok(najipay_core::stellar::StellarAddress::Muxed { id, .. }) => Some(id),
         _ => None,
     }
 }
@@ -326,7 +326,7 @@ mod tests {
     }
 
     fn muxed() -> String {
-        engipay_core::stellar::muxed_deposit_address(&custody(), 420).unwrap()
+        najipay_core::stellar::muxed_deposit_address(&custody(), 420).unwrap()
     }
 
     fn sender() -> String {

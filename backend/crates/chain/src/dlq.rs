@@ -36,7 +36,7 @@ use crate::ObservedDeposit;
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum DlqReason {
-    /// The deposit address is not associated with any known EngiPay user.
+    /// The deposit address is not associated with any known NaijaPay user.
     UnknownRecipient,
     /// A database constraint prevented the credit (e.g. duplicate reference).
     DatabaseConstraint,
@@ -166,7 +166,7 @@ pub async fn push_to_dlq(
 #[cfg(test)]
 #[allow(clippy::unwrap_used)]
 mod tests {
-    use engipay_core::{Asset, Money};
+    use najipay_core::{Asset, Money};
 
     use super::*;
     use crate::ObservedDeposit;

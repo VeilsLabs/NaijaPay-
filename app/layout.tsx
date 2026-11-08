@@ -12,10 +12,10 @@ import { ThemeToggle } from "@/components/app/ThemeToggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "EngiPay - Crypto Payments",
+  title: "NaijaPay - Crypto Payments",
   description:
     "Send and receive crypto on Base, Stellar and Bitcoin, pay by QR code, and convert between crypto and Naira.",
-  generator: "EngiPay",
+  generator: "NaijaPay",
 };
 
 export const viewport = {

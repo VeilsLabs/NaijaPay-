@@ -42,7 +42,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 text-xl font-bold">
           <Image src="/logo.svg" alt="" width={32} height={32} aria-hidden="true" />
-          EngiPay
+          NaijaPay
         </Link>
 
         <div className="hidden items-center gap-9 lg:flex">

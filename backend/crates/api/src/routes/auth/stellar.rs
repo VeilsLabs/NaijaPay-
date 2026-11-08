@@ -12,7 +12,7 @@ use crate::{
     error::ApiError,
     AppState,
 };
-use engipay_core::stellar::parse_address;
+use najipay_core::stellar::parse_address;
 
 const NETWORK_PASSPHRASE: &str = "Test SDF Network ; September 2015";
 
@@ -187,7 +187,7 @@ async fn verify(
 
 fn source_account_matches(
     source: &stellar_xdr::MuxedAccount,
-    claimed: &engipay_core::stellar::StellarAddress,
+    claimed: &najipay_core::stellar::StellarAddress,
 ) -> bool {
     let source_key = match source {
         stellar_xdr::MuxedAccount::KeyTypeEd25519(key) => key.0,
@@ -211,7 +211,7 @@ fn server_public_key_bytes(server_secret: &str) -> Result<[u8; 32], ApiError> {
 }
 
 fn client_public_key_bytes(
-    address: &engipay_core::stellar::StellarAddress,
+    address: &najipay_core::stellar::StellarAddress,
 ) -> Result<[u8; 32], ApiError> {
     stellar_strkey::ed25519::PublicKey::from_string(address.base_account())
         .map(|key| key.0)
@@ -505,7 +505,7 @@ mod tests {
     #[test]
     fn muxed_account_accepted() {
         let account = test_account();
-        let muxed = engipay_core::stellar::muxed_deposit_address(&account, 42).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&account, 42).unwrap();
 
         let response = build_challenge_transaction(&muxed);
         assert!(response.is_ok());
@@ -590,7 +590,7 @@ mod tests {
     #[test]
     fn source_account_matches_accepts_the_claimed_account() {
         let account = test_account();
-        let claimed = engipay_core::stellar::parse_address(&account).unwrap();
+        let claimed = najipay_core::stellar::parse_address(&account).unwrap();
         let source = stellar_xdr::MuxedAccount::KeyTypeEd25519(stellar_xdr::Uint256(
             ed25519::PublicKey::from_string(&account).unwrap().0,
         ));
@@ -601,7 +601,7 @@ mod tests {
     #[test]
     fn source_account_matches_rejects_a_different_account() {
         let other_account = ed25519::PublicKey([1; 32]).to_string();
-        let claimed = engipay_core::stellar::parse_address(&test_account()).unwrap();
+        let claimed = najipay_core::stellar::parse_address(&test_account()).unwrap();
         let source = stellar_xdr::MuxedAccount::KeyTypeEd25519(stellar_xdr::Uint256(
             ed25519::PublicKey::from_string(&other_account).unwrap().0,
         ));

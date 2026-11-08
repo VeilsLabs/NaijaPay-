@@ -17,7 +17,7 @@ const SMALL = [
   {
     title: "Convert in app",
     description:
-      "Swap one token for another without leaving EngiPay, with a quote you can read before you confirm.",
+      "Swap one token for another without leaving NaijaPay, with a quote you can read before you confirm.",
     icon: Zap,
   },
   {
@@ -54,7 +54,7 @@ export default function Features() {
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   Show a code with the amount already in it, or point your camera at someone
                   else&apos;s. The codes follow the standards other wallets read, so they work
-                  outside EngiPay too.
+                  outside NaijaPay too.
                 </p>
               </div>
 

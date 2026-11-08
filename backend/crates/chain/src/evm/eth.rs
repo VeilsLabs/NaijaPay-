@@ -2,7 +2,7 @@
 
 use std::collections::{HashMap, HashSet};
 
-use engipay_core::{Asset, Chain, Money};
+use najipay_core::{Asset, Chain, Money};
 use serde::Deserialize;
 
 use super::confirmations::confirmations_u32;

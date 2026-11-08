@@ -75,7 +75,7 @@ module.exports = {
           4: 'hsl(var(--chart-4) / <alpha-value>)',
           5: 'hsl(var(--chart-5) / <alpha-value>)',
         },
-        'engipay-green': '#00FF7F',
+        'najipay-green': '#00FF7F',
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',

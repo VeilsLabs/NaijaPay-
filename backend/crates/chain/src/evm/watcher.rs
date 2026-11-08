@@ -220,7 +220,7 @@ impl BlockWatcher {
     pub fn new(config: WatcherConfig) -> Result<(Self, FinalizedHeight), ChainError> {
         let http = reqwest::Client::builder()
             .timeout(Duration::from_secs(10))
-            .user_agent(concat!("engipay-chain/", env!("CARGO_PKG_VERSION")))
+            .user_agent(concat!("najipay-chain/", env!("CARGO_PKG_VERSION")))
             .build()
             .map_err(|e| ChainError::Unavailable(e.to_string()))?;
         let height = FinalizedHeight::new();

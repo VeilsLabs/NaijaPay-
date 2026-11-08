@@ -3,7 +3,7 @@ use std::str::FromStr;
 
 use serde::{Deserialize, Serialize};
 
-/// The networks EngiPay moves money on.
+/// The networks NaijaPay moves money on.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Chain {
@@ -16,7 +16,7 @@ impl Chain {
     pub const ALL: [Chain; 3] = [Chain::Base, Chain::Bitcoin, Chain::Stellar];
 }
 
-/// Every asset EngiPay holds. Adding one is a deliberate change here, not a
+/// Every asset NaijaPay holds. Adding one is a deliberate change here, not a
 /// string that shows up in a request.
 ///
 /// An asset is the *currency*, not where it lives. A user holding USDC has one

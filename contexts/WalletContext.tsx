@@ -128,8 +128,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const disconnectWallet = useCallback(() => {
     disconnect();
     stellar.disconnectStellar();
-    localStorage.removeItem("engipay-token");
-    localStorage.removeItem("engipay-user");
+    localStorage.removeItem("najipay-token");
+    localStorage.removeItem("najipay-user");
     toast({ title: "Wallet disconnected" });
   }, [disconnect, stellar]);
 

@@ -1,12 +1,12 @@
 # Security policy
 
-EngiPay handles money. We take every report seriously and are grateful to people who report problems responsibly.
+NaijaPay handles money. We take every report seriously and are grateful to people who report problems responsibly.
 
 ## Reporting a vulnerability
 
 **Please do not open a public issue.** Report privately through GitHub:
 
-**[Report a vulnerability](https://github.com/The-Engineer-Network/engipay/security/advisories/new)**
+**[Report a vulnerability](https://github.com/The-Engineer-Network/najipay/security/advisories/new)**
 
 Include what you found, how to reproduce it, and what an attacker could do with it. A proof of concept on testnet is ideal.
 
@@ -18,7 +18,7 @@ What happens next:
 
 ## Supported versions
 
-Only the `main` branch is supported. EngiPay is not yet running with real customer funds.
+Only the `main` branch is supported. NaijaPay is not yet running with real customer funds.
 
 ## In scope
 

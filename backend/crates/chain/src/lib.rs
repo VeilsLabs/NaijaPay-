@@ -1,6 +1,6 @@
 //! The chain service.
 //!
-//! This is the only EngiPay process that will ever hold signing keys, which is
+//! This is the only NaijaPay process that will ever hold signing keys, which is
 //! why it is a separate binary from the API: the API can be compromised without
 //! the attacker gaining the ability to move funds.
 //!
@@ -16,7 +16,7 @@ use std::pin::Pin;
 use std::sync::Arc;
 use std::time::Duration;
 
-use engipay_core::{Asset, Chain, Money};
+use najipay_core::{Asset, Chain, Money};
 
 #[derive(Debug, thiserror::Error)]
 pub enum ChainError {
@@ -36,7 +36,7 @@ pub enum ChainError {
     NotImplemented,
 }
 
-/// A transfer seen on-chain into one of EngiPay's deposit addresses.
+/// A transfer seen on-chain into one of NaijaPay's deposit addresses.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ObservedDeposit {
     pub money: Money,

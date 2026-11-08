@@ -12,8 +12,8 @@ publish = false
 # Every dependency is declared once here and inherited by the crates, so there
 # is one place to review what the backend pulls in. Cargo.lock is committed.
 [workspace.dependencies]
-engipay-core = { path = "crates/core" }
-engipay-ledger = { path = "crates/ledger" }
+najipay-core = { path = "crates/core" }
+najipay-ledger = { path = "crates/ledger" }
 
 anyhow = "1"
 axum = "0.8"

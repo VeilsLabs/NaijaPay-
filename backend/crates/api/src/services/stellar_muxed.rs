@@ -1,11 +1,11 @@
 //! SEP-23 muxed-address derivation service.
 //!
-//! Each EngiPay user on Stellar receives a unique `M...` muxed address derived
+//! Each NaijaPay user on Stellar receives a unique `M...` muxed address derived
 //! from the single shared custody account (`G...`) and a 64-bit user sequence
 //! ID.  This module is the service layer that:
 //!
 //! 1. Validates the master account string before attempting derivation.
-//! 2. Calls [`engipay_core::stellar::muxed_deposit_address`] — the canonical
+//! 2. Calls [`najipay_core::stellar::muxed_deposit_address`] — the canonical
 //!    derivation helper — with the master account and the user's sequence ID.
 //! 3. Returns the `M...` address as an owned [`String`].
 //!
@@ -16,14 +16,14 @@
 //! which derives the ID from the lower 64 bits of the user's UUID and writes a
 //! `deposit_addresses` row.  This service only performs the derivation step.
 //!
-//! # Relationship to `engipay_core::stellar`
+//! # Relationship to `najipay_core::stellar`
 //!
-//! [`engipay_core::stellar::muxed_deposit_address`] holds the ground truth for
+//! [`najipay_core::stellar::muxed_deposit_address`] holds the ground truth for
 //! how an `M...` address is constructed (using `stellar-strkey`, the SDF's own
 //! library).  This module wraps it with API-friendly error types and the
 //! validation that belongs at the service boundary.
 
-use engipay_core::stellar::{StellarAddressError, muxed_deposit_address};
+use najipay_core::stellar::{StellarAddressError, muxed_deposit_address};
 
 use crate::error::ApiError;
 
@@ -35,7 +35,7 @@ use crate::error::ApiError;
 /// `user_seq_id` (a 64-bit user-specific index) to produce a unique
 /// `M...` muxed account string.
 ///
-/// The derivation is performed by [`engipay_core::stellar::muxed_deposit_address`],
+/// The derivation is performed by [`najipay_core::stellar::muxed_deposit_address`],
 /// which uses the `stellar-strkey` library maintained by the Stellar
 /// Development Foundation.  The same address is always produced for the same
 /// `(master_account, user_seq_id)` pair — callers are responsible for storing
@@ -87,7 +87,7 @@ fn map_stellar_error(error: StellarAddressError) -> ApiError {
 #[cfg(test)]
 #[allow(clippy::unwrap_used)]
 mod tests {
-    use engipay_core::stellar::{StellarAddress, parse_address};
+    use najipay_core::stellar::{StellarAddress, parse_address};
     use stellar_strkey::ed25519;
 
     use super::*;

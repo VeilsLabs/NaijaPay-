@@ -9,8 +9,8 @@ import {
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "FAQ - EngiPay",
-  description: "Common questions about EngiPay: what it does, fees, security, and Naira transfers.",
+  title: "FAQ - NaijaPay",
+  description: "Common questions about NaijaPay: what it does, fees, security, and Naira transfers.",
 }
 
 interface QaGroup {
@@ -23,7 +23,7 @@ const GROUPS: QaGroup[] = [
     heading: "The basics",
     items: [
       {
-        question: "What is EngiPay?",
+        question: "What is NaijaPay?",
         answer:
           "A crypto payments app for Nigeria. You can send and receive crypto, pay by scanning a code, send Bitcoin wallet to wallet, convert one token into another, and move money between crypto and Naira.",
       },
@@ -55,12 +55,12 @@ const GROUPS: QaGroup[] = [
       {
         question: "What does it cost?",
         answer:
-          "Payments between EngiPay users are free. Sending on-chain pays the usual network fee. Conversions and Naira transfers show the rate and the fee together, before you confirm anything.",
+          "Payments between NaijaPay users are free. Sending on-chain pays the usual network fee. Conversions and Naira transfers show the rate and the fee together, before you confirm anything.",
       },
       {
         question: "How does paying by code work?",
         answer:
-          "The person getting paid shows a code, optionally with an amount already in it. The payer scans it and confirms. The codes use the same standards other wallets read, so they work outside EngiPay too.",
+          "The person getting paid shows a code, optionally with an amount already in it. The payer scans it and confirms. The codes use the same standards other wallets read, so they work outside NaijaPay too.",
       },
       {
         question: "Which features are live today?",
@@ -73,19 +73,19 @@ const GROUPS: QaGroup[] = [
     heading: "Security and availability",
     items: [
       {
-        question: "Is EngiPay secure?",
+        question: "Is NaijaPay secure?",
         answer:
           "We never ask for your seed phrase, and every transaction is shown in full before you confirm it. Signing keys are kept in a separate service from the app, large withdrawals need a second approval, and balances are checked against the chain on a schedule.",
       },
       {
-        question: "Where is EngiPay available?",
+        question: "Where is NaijaPay available?",
         answer:
           "The crypto features work anywhere you can reach the internet. Buying and selling Naira is for Nigeria, since it settles into Nigerian bank accounts and follows Nigerian identity rules.",
       },
       {
         question: "What happens if I lose my phone?",
         answer:
-          "Anything held in your own connected wallet is recovered the way that wallet normally recovers, with its seed phrase. Funds held in an EngiPay balance are tied to your account, so you regain access by signing in again.",
+          "Anything held in your own connected wallet is recovered the way that wallet normally recovers, with its seed phrase. Funds held in an NaijaPay balance are tied to your account, so you regain access by signing in again.",
       },
     ],
   },
@@ -97,7 +97,7 @@ export default function FaqPage() {
       <MarketingHero
         title="Frequently asked"
         highlight="questions"
-        description="What EngiPay does, what it costs, and how your money is handled."
+        description="What NaijaPay does, what it costs, and how your money is handled."
       />
 
       <section className="py-16">

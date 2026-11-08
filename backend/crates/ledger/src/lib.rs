@@ -1,4 +1,4 @@
-//! EngiPay's double-entry ledger.
+//! NaijaPay's double-entry ledger.
 //!
 //! The ledger, not the blockchain, is the source of truth for what each user
 //! owns. Three rules hold after every operation, and the tests pin them down:
@@ -18,7 +18,7 @@ pub mod postgres;
 
 use std::collections::HashMap;
 
-use engipay_core::{Asset, Money, UserId};
+use najipay_core::{Asset, Money, UserId};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
@@ -32,7 +32,7 @@ pub enum Bucket {
     Held,
 }
 
-/// EngiPay's own accounts, the other side of money entering or leaving.
+/// NaijaPay's own accounts, the other side of money entering or leaving.
 /// These are allowed to go negative: `ExternalInflow` going negative is simply
 /// the record of how much has come in from outside.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -42,7 +42,7 @@ pub enum SystemAccount {
     ExternalInflow,
     /// Where settled withdrawals and off-ramp payouts go.
     ExternalOutflow,
-    /// Fees EngiPay has earned.
+    /// Fees NaijaPay has earned.
     Fees,
 }
 
@@ -219,7 +219,7 @@ impl Ledger {
         Self::default()
     }
 
-    /// Credits a user with money that arrived from outside EngiPay.
+    /// Credits a user with money that arrived from outside NaijaPay.
     /// `reference` should identify the source uniquely, e.g. `base:<tx hash>:<log index>`.
     pub fn deposit(
         &mut self,
@@ -337,7 +337,7 @@ impl Ledger {
         self.commit(TransactionKind::ReleaseHold, reference, request, postings)
     }
 
-    /// Settles a hold: the held money leaves EngiPay, and an optional fee is
+    /// Settles a hold: the held money leaves NaijaPay, and an optional fee is
     /// booked as revenue. The fee must be in the same asset and no larger than
     /// the held amount.
     pub fn settle(

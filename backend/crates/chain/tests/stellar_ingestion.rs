@@ -3,7 +3,7 @@
 //! These tests drive [`StellarClient::deposits_since`] against a
 //! [`wiremock::MockServer`] that replays pre-recorded Horizon JSON.  Every
 //! assertion targets the public surface of the crate
-//! (`engipay_chain::{ChainClient, ObservedDeposit}`) so they remain valid
+//! (`najipay_chain::{ChainClient, ObservedDeposit}`) so they remain valid
 //! regardless of internal refactors.
 //!
 //! Scenario coverage
@@ -22,10 +22,10 @@
 
 #![allow(clippy::unwrap_used)]
 
-use engipay_chain::stellar::{StellarClient, StellarConfig, StellarNetwork};
-use engipay_chain::{ChainClient, ChainError, is_creditable};
-use engipay_core::stellar::muxed_deposit_address;
-use engipay_core::{Asset, Chain, Money};
+use najipay_chain::stellar::{StellarClient, StellarConfig, StellarNetwork};
+use najipay_chain::{ChainClient, ChainError, is_creditable};
+use najipay_core::stellar::muxed_deposit_address;
+use najipay_core::{Asset, Chain, Money};
 use wiremock::matchers::{method, path, query_param};
 use wiremock::{Mock, MockServer, ResponseTemplate};
 

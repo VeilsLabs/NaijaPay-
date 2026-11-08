@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const STORAGE_KEY = "engipay-theme-toggle-position"
+const STORAGE_KEY = "najipay-theme-toggle-position"
 const EDGE_GAP = 20
 /** Pointer travel, in px, past which a press counts as a drag and not a tap. */
 const DRAG_THRESHOLD = 4

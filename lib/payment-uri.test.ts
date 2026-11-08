@@ -184,10 +184,10 @@ describe("parsePaymentCode", () => {
     assert.equal(parsePaymentCode("bitcoin:notanaddress?amount=1"), null)
   })
 
-  it("reads an EngiPay envelope", () => {
+  it("reads an NaijaPay envelope", () => {
     const raw = JSON.stringify({
       v: 1,
-      type: "engipay.request",
+      type: "najipay.request",
       chain: "base",
       to: EVM,
       asset: "USDC",
@@ -201,16 +201,16 @@ describe("parsePaymentCode", () => {
     assert.equal(result?.reference, "inv_123")
   })
 
-  it("refuses an EngiPay envelope with no recipient", () => {
-    assert.equal(parsePaymentCode(JSON.stringify({ type: "engipay.request", amount: "5" })), null)
+  it("refuses an NaijaPay envelope with no recipient", () => {
+    assert.equal(parsePaymentCode(JSON.stringify({ type: "najipay.request", amount: "5" })), null)
   })
 
-  it("refuses an EngiPay envelope whose recipient is not a valid address", () => {
-    const raw = JSON.stringify({ type: "engipay.request", chain: "base", to: "0xnope" })
+  it("refuses an NaijaPay envelope whose recipient is not a valid address", () => {
+    const raw = JSON.stringify({ type: "najipay.request", chain: "base", to: "0xnope" })
     assert.equal(parsePaymentCode(raw), null)
   })
 
-  it("ignores JSON that is not an EngiPay request", () => {
+  it("ignores JSON that is not an NaijaPay request", () => {
     assert.equal(parsePaymentCode(JSON.stringify({ to: EVM })), null)
   })
 })
@@ -256,7 +256,7 @@ describe("Stellar payment codes (SEP-7)", () => {
       // More than seven decimals, or not a number.
       `web+stellar:pay?destination=${STELLAR}&amount=1.00000001`,
       `web+stellar:pay?destination=${STELLAR}&amount=-1`,
-      // A memo EngiPay cannot attach: a hash, a text memo over 28 bytes, an id over 64 bits.
+      // A memo NaijaPay cannot attach: a hash, a text memo over 28 bytes, an id over 64 bits.
       `web+stellar:pay?destination=${STELLAR}&memo=abc&memo_type=MEMO_HASH`,
       `web+stellar:pay?destination=${STELLAR}&memo=${"x".repeat(29)}`,
       `web+stellar:pay?destination=${STELLAR}&memo=18446744073709551616&memo_type=MEMO_ID`,
@@ -268,7 +268,7 @@ describe("Stellar payment codes (SEP-7)", () => {
     assert.equal(parsePaymentCode("web+stellar:tx?xdr=AAAA"), null)
   })
 
-  it("reads a Stellar EngiPay envelope from its embedded URI", () => {
+  it("reads a Stellar NaijaPay envelope from its embedded URI", () => {
     const raw = buildEngipayRequest({
       chain: "stellar",
       address: STELLAR,
@@ -286,7 +286,7 @@ describe("Stellar payment codes (SEP-7)", () => {
 
   it("refuses an envelope whose URI pays someone other than its recipient", () => {
     const other = buildPaymentUri({ chain: "stellar", address: STELLAR_MUXED, amount: "5" })
-    const raw = JSON.stringify({ type: "engipay.request", chain: "stellar", to: STELLAR, uri: other })
+    const raw = JSON.stringify({ type: "najipay.request", chain: "stellar", to: STELLAR, uri: other })
     assert.equal(parsePaymentCode(raw), null)
   })
 })
@@ -346,11 +346,11 @@ describe("building codes", () => {
     assert.equal(buildPaymentUri({ chain: "base", address: EVM }), `ethereum:${EVM}@8453`)
   })
 
-  it("embeds the standard URI inside an EngiPay envelope", () => {
+  it("embeds the standard URI inside an NaijaPay envelope", () => {
     const envelope = JSON.parse(
       buildEngipayRequest({ chain: "base", address: EVM, amount: "3", asset: "ETH" })
     )
-    assert.equal(envelope.type, "engipay.request")
+    assert.equal(envelope.type, "najipay.request")
     assert.equal(envelope.uri, buildPaymentUri({ chain: "base", address: EVM, amount: "3" }))
   })
 })

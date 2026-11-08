@@ -9,8 +9,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-db="engipay_guarantees_$$"
-psql() { docker compose exec -T postgres psql -U "${POSTGRES_USER:-engipay}" -q "$@"; }
+db="najipay_guarantees_$$"
+psql() { docker compose exec -T postgres psql -U "${POSTGRES_USER:-najipay}" -q "$@"; }
 
 cleanup() { psql -d postgres -c "DROP DATABASE IF EXISTS $db;" >/dev/null 2>&1 || true; }
 trap cleanup EXIT

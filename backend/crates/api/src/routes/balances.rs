@@ -1,14 +1,14 @@
 use axum::extract::{Query, State};
 use axum::routing::get;
 use axum::{Json, Router};
-use engipay_ledger::postgres::PostgresLedgerStore;
-use engipay_ledger::{Balance, HoldItem};
+use najipay_ledger::postgres::PostgresLedgerStore;
+use najipay_ledger::{Balance, HoldItem};
 use serde::{Deserialize, Serialize};
-use engipay_core::Asset;
-use engipay_ledger::Balance;
-use engipay_ledger::postgres::{ActiveHold, PostgresLedgerStore};
+use najipay_core::Asset;
+use najipay_ledger::Balance;
+use najipay_ledger::postgres::{ActiveHold, PostgresLedgerStore};
 use serde::{Deserialize, Serialize};
-use engipay_ledger::postgres::PostgresLedgerStore;
+use najipay_ledger::postgres::PostgresLedgerStore;
 use serde::{Deserialize, Serialize};
 use serde::Serialize;
 
@@ -194,7 +194,7 @@ pub fn format_minor(asset: Asset, minor: i128) -> String {
 }
 
 /// Live custodial balances for the authenticated caller, across every asset
-/// EngiPay supports (`ETH`, `USDC`, `BTC`, `XLM`), read from the ledger.
+/// NaijaPay supports (`ETH`, `USDC`, `BTC`, `XLM`), read from the ledger.
 ///
 /// Pass `?include_holds=true` to also receive the caller's open holds.
 /// Pass `?include_holds=true` to receive a per-hold breakdown under each
@@ -281,9 +281,9 @@ async fn get_balances(
 #[cfg(test)]
 #[allow(clippy::unwrap_used, clippy::arithmetic_side_effects)]
 mod tests {
-    use engipay_core::Asset;
-    use engipay_ledger::Balance;
-    use engipay_ledger::postgres::ActiveHold;
+    use najipay_core::Asset;
+    use najipay_ledger::Balance;
+    use najipay_ledger::postgres::ActiveHold;
 
     use super::{BalanceResponse, HoldItem, format_minor};
 
@@ -702,8 +702,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_true_populates_holds_array() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let Ok(database_url) = std::env::var("DATABASE_URL") else {
             return;
@@ -835,8 +835,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_true_with_no_holds_returns_empty_array() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let Ok(database_url) = std::env::var("DATABASE_URL") else {
             return;
@@ -907,8 +907,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn returns_the_callers_live_balances() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let user = UserId::new();
@@ -968,8 +968,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_returns_active_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let Ok(database_url) = std::env::var("DATABASE_URL") else {
             return;
@@ -1059,8 +1059,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_excludes_released_and_settled_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let Ok(database_url) = std::env::var("DATABASE_URL") else {
             return;
@@ -1150,8 +1150,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_returns_empty_array_when_no_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let Ok(database_url) = std::env::var("DATABASE_URL") else {
             return;
@@ -1221,8 +1221,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_returns_empty_array_when_no_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let user = UserId::new();
@@ -1274,8 +1274,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_returns_open_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let user = UserId::new();
@@ -1348,8 +1348,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn include_holds_excludes_released_and_settled_holds() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let user = UserId::new();
@@ -1430,8 +1430,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn without_include_holds_response_is_plain_array() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let user = UserId::new();
@@ -1484,8 +1484,8 @@ mod tests {
     #[tokio::test]
     #[ignore = "requires DATABASE_URL"]
     async fn postgres_queries_settlement_and_sender_locking() {
-        use engipay_core::{Asset, Money, UserId};
-        use engipay_ledger::postgres::PostgresLedgerStore;
+        use najipay_core::{Asset, Money, UserId};
+        use najipay_ledger::postgres::PostgresLedgerStore;
 
         let pool = test_pool().await.unwrap();
         let alice = UserId::new();
@@ -1572,7 +1572,7 @@ mod tests {
         assert!(
             matches!(
                 result,
-                Err(engipay_ledger::LedgerError::InsufficientFunds { .. })
+                Err(najipay_ledger::LedgerError::InsufficientFunds { .. })
             ),
             "transfer must be blocked by available balance, not total"
         );

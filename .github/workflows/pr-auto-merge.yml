@@ -47,7 +47,7 @@ jobs:
 
             # Build detailed feedback message for contributor
             COMMENT_BODY=$(cat <<EOF
-          👋 Hi @$PR_AUTHOR! Thank you for contributing to EngiPay.
+          👋 Hi @$PR_AUTHOR! Thank you for contributing to NaijaPay.
 
           Before this Pull Request can be reviewed and auto-merged into **\`drips\`**, the following requirements must be addressed:
 

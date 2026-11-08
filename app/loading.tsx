@@ -6,7 +6,7 @@ export default function Loading() {
           className="h-8 w-8 animate-spin rounded-full border-2 border-border border-t-primary"
           aria-hidden="true"
         />
-        <p className="text-sm">Loading EngiPay…</p>
+        <p className="text-sm">Loading NaijaPay…</p>
       </div>
     </div>
   )

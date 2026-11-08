@@ -1,5 +1,5 @@
 use anyhow::Context;
-use engipay_api::{AppState, config::Config, router};
+use najipay_api::{AppState, config::Config, router};
 use sqlx::postgres::PgPoolOptions;
 use tracing::{info, warn};
 
@@ -38,7 +38,7 @@ async fn main() -> anyhow::Result<()> {
     let listener = tokio::net::TcpListener::bind(&config.bind_addr)
         .await
         .with_context(|| format!("could not bind {}", config.bind_addr))?;
-    info!(address = %config.bind_addr, "engipay api listening");
+    info!(address = %config.bind_addr, "najipay api listening");
 
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())

@@ -83,8 +83,8 @@ mod tests {
     fn usdc_issuers_are_valid_accounts() {
         for network in [StellarNetwork::Testnet, StellarNetwork::Mainnet] {
             assert!(matches!(
-                engipay_core::stellar::parse_address(network.usdc_issuer()),
-                Ok(engipay_core::stellar::StellarAddress::Account(_))
+                najipay_core::stellar::parse_address(network.usdc_issuer()),
+                Ok(najipay_core::stellar::StellarAddress::Account(_))
             ));
         }
     }

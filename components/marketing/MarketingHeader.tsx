@@ -24,7 +24,7 @@ export function MarketingHeader() {
       <div className="container flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-2.5 text-xl font-bold">
           <Image src="/logo.svg" alt="" width={28} height={28} aria-hidden="true" />
-          EngiPay
+          NaijaPay
         </Link>
 
         <nav aria-label="Pages" className="hidden items-center gap-8 lg:flex">

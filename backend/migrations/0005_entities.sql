@@ -1,4 +1,4 @@
--- Extended entities schema for EngiPay (Epic 1: DB-03).
+-- Extended entities schema for NaijaPay (Epic 1: DB-03).
 -- Includes user profiles, deposit addresses, bank accounts, token conversions,
 -- ramp orders, and deduplicated partner webhook events.
 

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "Features - EngiPay",
+  title: "Features - NaijaPay",
   description:
     "Send and receive crypto, pay by scanning a code, send Bitcoin, and move money between crypto and Naira.",
 }
@@ -36,13 +36,13 @@ const FEATURES: Feature[] = [
     title: "Scan to pay and receive",
     summary: "Show a code to get paid. Scan a code to pay.",
     detail:
-      "Your code can carry an amount and an asset, so the person paying does not have to type anything. The codes follow the same standards other wallets use, so they work outside EngiPay too.",
+      "Your code can carry an amount and an asset, so the person paying does not have to type anything. The codes follow the same standards other wallets use, so they work outside NaijaPay too.",
     live: [
       "A working camera scanner",
       "Your receive code, with an optional amount",
       "Reading codes from other wallets",
     ],
-    pending: ["Instant EngiPay to EngiPay transfers, with no network fee"],
+    pending: ["Instant NaijaPay to NaijaPay transfers, with no network fee"],
   },
   {
     icon: Bitcoin,
@@ -56,11 +56,11 @@ const FEATURES: Feature[] = [
   {
     icon: Wallet,
     title: "Add a wallet, then send or convert",
-    summary: "Bring your own wallet, and move money from inside EngiPay.",
+    summary: "Bring your own wallet, and move money from inside NaijaPay.",
     detail:
-      "Connect the wallet you already use and move funds into EngiPay. From there, send to any address, or convert one token into another. Withdraw back to your own wallet whenever you want.",
+      "Connect the wallet you already use and move funds into NaijaPay. From there, send to any address, or convert one token into another. Withdraw back to your own wallet whenever you want.",
     live: ["Wallet connection", "Sending ETH and USDC on Base", "Live balances"],
-    pending: ["Deposits into an EngiPay balance", "Converting one token into another"],
+    pending: ["Deposits into an NaijaPay balance", "Converting one token into another"],
   },
 ]
 

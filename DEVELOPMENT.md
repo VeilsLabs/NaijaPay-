@@ -1,6 +1,6 @@
 # Development Guide
 
-Welcome to EngiPay development! This guide covers the local development workflow, running tests, ensuring code quality, and submitting pull requests.
+Welcome to NaijaPay development! This guide covers the local development workflow, running tests, ensuring code quality, and submitting pull requests.
 
 ---
 
@@ -67,7 +67,7 @@ docker compose run --rm toolbox cargo test --workspace
 
 ### 3. Database & Ledger Invariants (PostgreSQL)
 
-EngiPay's double-entry ledger is guarded by append-only database triggers. Validate the schema guarantees:
+NaijaPay's double-entry ledger is guarded by append-only database triggers. Validate the schema guarantees:
 
 ```bash
 cd backend

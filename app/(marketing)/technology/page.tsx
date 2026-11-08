@@ -4,9 +4,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "Technology - EngiPay",
+  title: "Technology - NaijaPay",
   description:
-    "What EngiPay is built on: Base, the Bitcoin network, standard payment codes, and a Rust service for keys and transfers.",
+    "What NaijaPay is built on: Base, the Bitcoin network, standard payment codes, and a Rust service for keys and transfers.",
 }
 
 const STACK = [
@@ -23,7 +23,7 @@ const STACK = [
   {
     icon: QrCode,
     title: "Standard payment codes",
-    body: "Our codes follow EIP-681 on Base and BIP-21 on Bitcoin, the formats other wallets already read. EngiPay adds a note and a reference on top, without breaking that compatibility.",
+    body: "Our codes follow EIP-681 on Base and BIP-21 on Bitcoin, the formats other wallets already read. NaijaPay adds a note and a reference on top, without breaking that compatibility.",
   },
   {
     icon: Wallet,
@@ -47,7 +47,7 @@ export default function TechnologyPage() {
     <>
       <MarketingHero
         title="Technology"
-        description="The pieces EngiPay is built from, and why each one was chosen."
+        description="The pieces NaijaPay is built from, and why each one was chosen."
       />
 
       <section className="py-16">

@@ -1,4 +1,4 @@
--- Immutability triggers and performance indices for EngiPay (Epic 1: DB-01 / DB-03 extensions).
+-- Immutability triggers and performance indices for NaijaPay (Epic 1: DB-01 / DB-03 extensions).
 -- Enforces identity immutability and adds high-throughput indices for postings
 -- and deposit address lookups.
 

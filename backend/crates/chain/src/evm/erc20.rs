@@ -3,7 +3,7 @@
 
 use std::collections::HashSet;
 
-use engipay_core::{Asset, Chain, Money};
+use najipay_core::{Asset, Chain, Money};
 use serde::Deserialize;
 use serde_json::{Value, json};
 

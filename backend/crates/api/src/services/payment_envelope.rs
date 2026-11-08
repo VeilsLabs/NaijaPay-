@@ -1,6 +1,6 @@
-//! EngiPay standard payment request envelope.
+//! NaijaPay standard payment request envelope.
 //!
-//! For EngiPay-to-EngiPay QR codes we wrap the payment intent in a JSON
+//! For NaijaPay-to-NaijaPay QR codes we wrap the payment intent in a JSON
 //! envelope so that a scanning client can distinguish it from a plain
 //! standard URI (e.g. an EIP-681 / SEP-0007 style `ethereum:` or `web+stellar:`
 //! link). The envelope is intentionally self-describing and versioned.
@@ -9,7 +9,7 @@
 //! ```json
 //! {
 //!   "v": 1,
-//!   "type": "engipay.request",
+//!   "type": "najipay.request",
 //!   "chain": "base",
 //!   "to": "0x...",
 //!   "asset": "USDC",
@@ -29,8 +29,8 @@ use thiserror::Error;
 /// Current envelope schema version.
 pub const ENVELOPE_VERSION: u8 = 1;
 
-/// Envelope `type` discriminator for EngiPay payment requests.
-pub const ENVELOPE_TYPE: &str = "engipay.request";
+/// Envelope `type` discriminator for NaijaPay payment requests.
+pub const ENVELOPE_TYPE: &str = "najipay.request";
 
 /// Default chain used when the caller does not specify one.
 pub const DEFAULT_CHAIN: &str = "base";
@@ -55,7 +55,7 @@ pub enum EnvelopeError {
     InvalidTag(String),
 }
 
-/// A validated EngiPay standard payment request envelope.
+/// A validated NaijaPay standard payment request envelope.
 ///
 /// Construct one via [`PaymentEnvelope::new`] (or [`PaymentEnvelope::with_chain`])
 /// so that all invariants are enforced before serialization.
@@ -63,7 +63,7 @@ pub enum EnvelopeError {
 pub struct PaymentEnvelope {
     /// Schema version.
     pub v: u8,
-    /// Envelope type discriminator (`engipay.request`).
+    /// Envelope type discriminator (`najipay.request`).
     #[serde(rename = "type")]
     pub kind: String,
     /// Chain identifier, e.g. `base`.
@@ -143,7 +143,7 @@ impl PaymentEnvelope {
 /// Build the fallback standard URI embedded in the envelope.
 ///
 /// The URI is a plain `ethereum:`-style link so that wallets which do not
-/// understand the EngiPay envelope can still complete the transfer.
+/// understand the NaijaPay envelope can still complete the transfer.
 fn fallback_uri(chain: &str, to: &str, asset: &str, amount: &str) -> String {
     format!("ethereum:{to}@{chain}?value={amount}&asset={asset}")
 }
@@ -238,7 +238,7 @@ mod tests {
         let json: Value = serde_json::from_str(&env.to_json()).expect("valid json");
 
         assert_eq!(json["v"], 1);
-        assert_eq!(json["type"], "engipay.request");
+        assert_eq!(json["type"], "najipay.request");
         assert_eq!(json["chain"], "base");
         assert_eq!(json["to"], TO);
         assert_eq!(json["asset"], "USDC");

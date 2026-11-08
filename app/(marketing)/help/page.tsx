@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { MarketingHero } from "@/components/marketing/MarketingHero"
 
 export const metadata: Metadata = {
-  title: "Help centre - EngiPay",
+  title: "Help centre - NaijaPay",
   description: "Step-by-step guides for connecting a wallet, sending, getting paid and Naira transfers.",
 }
 
@@ -23,14 +23,14 @@ const GUIDES: Guide[] = [
     id: "connect",
     icon: Wallet,
     title: "Connect your wallet",
-    intro: "Everything starts here. EngiPay works with the wallet you already use.",
+    intro: "Everything starts here. NaijaPay works with the wallet you already use.",
     steps: [
       "Open the app and press Connect wallet.",
       "Pick your wallet from the list. Browser wallets appear automatically.",
       "On a phone, choose WalletConnect and scan the code with your wallet app.",
       "Approve the connection request in your wallet.",
     ],
-    note: "Connecting only shares your address. It never gives EngiPay permission to move your funds.",
+    note: "Connecting only shares your address. It never gives NaijaPay permission to move your funds.",
   },
   {
     id: "send",
@@ -57,7 +57,7 @@ const GUIDES: Guide[] = [
       "Choose the asset you want to be paid in.",
       "Show the code, or press Share to send the link on WhatsApp.",
     ],
-    note: "The code uses a standard format, so it also works in wallets that are not EngiPay.",
+    note: "The code uses a standard format, so it also works in wallets that are not NaijaPay.",
   },
   {
     id: "scan",
@@ -80,7 +80,7 @@ const GUIDES: Guide[] = [
     steps: [
       "Go to Buy to fund with Naira, or Sell to cash out.",
       "Enter the amount and read the quote: the rate and the fee are shown separately.",
-      "Complete the identity check the first time. It is a legal requirement, not an EngiPay rule.",
+      "Complete the identity check the first time. It is a legal requirement, not an NaijaPay rule.",
       "Confirm before the quote expires. Quotes are only held for a short time because the rate moves.",
     ],
     note: "These screens are built, but they cannot take a payment until the Naira partner is connected.",
@@ -102,7 +102,7 @@ const TROUBLE = [
   },
   {
     problem: "My balance shows zero but I have funds",
-    fix: "Check that your wallet is on the right network. EngiPay uses Base, so funds on Ethereum mainnet or another chain will not show here.",
+    fix: "Check that your wallet is on the right network. NaijaPay uses Base, so funds on Ethereum mainnet or another chain will not show here.",
   },
 ]
 
@@ -188,7 +188,7 @@ export default function HelpPage() {
             <Link href="/faq" className="text-primary hover:underline">
               FAQ
             </Link>{" "}
-            covers fees, security and where EngiPay is available.
+            covers fees, security and where NaijaPay is available.
           </p>
         </div>
       </section>

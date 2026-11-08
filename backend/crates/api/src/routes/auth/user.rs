@@ -1,6 +1,6 @@
 use axum::extract::FromRequestParts;
 use axum::http::request::Parts;
-use engipay_core::UserId;
+use najipay_core::UserId;
 
 use crate::auth::jwt::{self, Claims};
 use crate::{AppState, error::ApiError};

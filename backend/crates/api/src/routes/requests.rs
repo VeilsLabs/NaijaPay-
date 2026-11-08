@@ -85,7 +85,7 @@ pub async fn create_payment_request(
 
     let id = Uuid::new_v4();
     let expires_at = Utc::now() + Duration::minutes(payload.expiry_minutes);
-    let uri = format!("engipay:{}?asset={}&amount={}", id, asset, payload.amount);
+    let uri = format!("najipay:{}?asset={}&amount={}", id, asset, payload.amount);
 
     let result = sqlx::query(
         "INSERT INTO payment_requests (id, asset, amount, note, uri, expires_at) \

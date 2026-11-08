@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /*
- * EngiPay design tokens.
+ * NaijaPay design tokens.
  * Values are HSL *channels* (no hsl() wrapper) so Tailwind can apply
  * opacity modifiers such as `bg-primary/90` and `border-border/50`.
  * The app is dark-first: :root is the dark theme.
@@ -20,7 +20,7 @@
     --popover: 150 14% 8%;
     --popover-foreground: 150 8% 96%;
 
-    /* Brand — #00FF7F, the existing EngiPay green */
+    /* Brand — #00FF7F, the existing NaijaPay green */
     --primary: 150 100% 50%;
     --primary-foreground: 150 40% 4%;
 

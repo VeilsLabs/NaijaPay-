@@ -12,7 +12,7 @@ use std::time::Duration;
 use sqlx::{PgPool, Postgres, Row};
 use uuid::Uuid;
 
-use engipay_core::{Asset, Money, UserId};
+use najipay_core::{Asset, Money, UserId};
 
 use crate::{ActiveHold, Balance, HoldState, LedgerError, Receipt};
 
@@ -43,7 +43,7 @@ impl PostgresLedgerStore {
         Self { pool }
     }
 
-    /// Live custodial balances for `user`, across every asset EngiPay
+    /// Live custodial balances for `user`, across every asset NaijaPay
     /// supports (`Asset::ALL`), read directly from the ledger postings —
     /// the same source of truth every other method here writes to.
     ///
@@ -167,7 +167,7 @@ impl PostgresLedgerStore {
         Ok(holds)
     }
 
-    /// Credits a user with money that arrived from outside EngiPay.
+    /// Credits a user with money that arrived from outside NaijaPay.
     ///
     /// If `reference` was already used with identical parameters, returns
     /// the original [`Receipt`] with `replayed: true` and moves nothing.
@@ -808,7 +808,7 @@ mod tests {
 
     // ── Integration tests (require a PostgreSQL database) ──────────────
     //
-    // Run with: DATABASE_URL=postgres://… cargo test -p engipay-ledger \
+    // Run with: DATABASE_URL=postgres://… cargo test -p najipay-ledger \
     //           --features postgres -- --ignored
 
     async fn test_pool() -> Option<PgPool> {

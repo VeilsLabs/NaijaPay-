@@ -12,8 +12,8 @@ pub mod payment;
 use std::sync::Mutex;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
-use engipay_core::Chain;
-use engipay_core::stellar::{StellarAddress, parse_address};
+use najipay_core::Chain;
+use najipay_core::stellar::{StellarAddress, parse_address};
 use tracing::{error, warn};
 
 use self::horizon::{Account, Page, PaymentRecord, Root, SubmitProblem, Submitted, TransactionCache};
@@ -73,7 +73,7 @@ impl StellarClient {
     pub fn new(config: StellarConfig) -> Result<Self, ChainError> {
         let http = reqwest::Client::builder()
             .timeout(Duration::from_secs(20))
-            .user_agent(concat!("engipay-chain/", env!("CARGO_PKG_VERSION")))
+            .user_agent(concat!("najipay-chain/", env!("CARGO_PKG_VERSION")))
             .build()
             .map_err(|error| ChainError::Unavailable(error.to_string()))?;
         Ok(Self {
@@ -422,7 +422,7 @@ mod tests {
     use wiremock::{Mock, MockServer, ResponseTemplate};
 
     use super::*;
-    use engipay_core::{Asset, Money};
+    use najipay_core::{Asset, Money};
 
     fn account(seed: u8) -> String {
         stellar_strkey::ed25519::PublicKey([seed; 32])
@@ -439,7 +439,7 @@ mod tests {
 
     #[test]
     fn custody_must_be_a_plain_account() {
-        let muxed = engipay_core::stellar::muxed_deposit_address(&account(1), 5).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&account(1), 5).unwrap();
         assert!(StellarConfig::new(StellarNetwork::Testnet, None, &muxed).is_err());
         assert!(StellarConfig::new(StellarNetwork::Testnet, None, "nope").is_err());
         let config = StellarConfig::new(StellarNetwork::Testnet, None, &account(1)).unwrap();
@@ -450,7 +450,7 @@ mod tests {
     async fn reads_deposits_from_the_ledger_cursor() {
         let server = MockServer::start().await;
         let custody = account(1);
-        let muxed = engipay_core::stellar::muxed_deposit_address(&custody, 9).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&custody, 9).unwrap();
 
         Mock::given(method("GET"))
             .and(path("/"))
@@ -580,7 +580,7 @@ mod tests {
     async fn only_circle_testnet_usdc_is_credited() {
         let server = MockServer::start().await;
         let custody = account(1);
-        let muxed = engipay_core::stellar::muxed_deposit_address(&custody, 7).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&custody, 7).unwrap();
 
         Mock::given(method("GET"))
             .and(path("/"))
@@ -697,7 +697,7 @@ mod tests {
     async fn multi_operation_transaction_uses_cache_for_repeated_hash() {
         let server = MockServer::start().await;
         let custody = account(1);
-        let muxed = engipay_core::stellar::muxed_deposit_address(&custody, 7).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&custody, 7).unwrap();
         let tx_hash = "cafebabe";
 
         Mock::given(method("GET"))
@@ -769,7 +769,7 @@ mod tests {
 
         let total_stroops: i64 = deposits
             .iter()
-            .map(|d| d.money.to_network_units(engipay_core::Chain::Stellar).unwrap())
+            .map(|d| d.money.to_network_units(najipay_core::Chain::Stellar).unwrap())
             .sum();
         assert_eq!(total_stroops, 60_000_000, "1 + 2 + 3 XLM = 6 XLM = 60_000_000 stroops");
 
@@ -784,7 +784,7 @@ mod tests {
     async fn joined_transaction_does_not_trigger_extra_fetch() {
         let server = MockServer::start().await;
         let custody = account(1);
-        let muxed = engipay_core::stellar::muxed_deposit_address(&custody, 9).unwrap();
+        let muxed = najipay_core::stellar::muxed_deposit_address(&custody, 9).unwrap();
 
         Mock::given(method("GET"))
             .and(path("/"))

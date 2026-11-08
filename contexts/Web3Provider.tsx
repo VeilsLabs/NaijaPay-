@@ -19,11 +19,11 @@ const base = darkTheme({
 
 /**
  * RainbowKit's own dark theme is a neutral grey that reads as a different
- * product next to ours. This pulls its surfaces onto the EngiPay palette:
+ * product next to ours. This pulls its surfaces onto the NaijaPay palette:
  * near-black with a green cast, hairline borders, and a brand-tinted glow
  * instead of a flat drop shadow.
  */
-const engipayWalletTheme: Theme = {
+const najipayWalletTheme: Theme = {
   ...base,
   colors: {
     ...base.colors,
@@ -78,7 +78,7 @@ const lightBase = lightTheme({
 });
 
 /** The same panel on the light palette, so it matches when users switch. */
-const engipayWalletThemeLight: Theme = {
+const najipayWalletThemeLight: Theme = {
   ...lightBase,
   colors: {
     ...lightBase.colors,
@@ -95,7 +95,7 @@ const engipayWalletThemeLight: Theme = {
     closeButtonBackground: "hsl(150 16% 94%)",
     selectedOptionBorder: "hsl(152 84% 30% / 0.5)",
   },
-  radii: engipayWalletTheme.radii,
+  radii: najipayWalletTheme.radii,
   shadows: {
     ...lightBase.shadows,
     dialog: "0 28px 70px -30px hsl(152 84% 30% / 0.25), 0 0 0 1px hsl(150 14% 88%)",
@@ -113,11 +113,11 @@ export function Web3Provider({ children }: { children: ReactNode }) {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
-          theme={resolvedTheme === "light" ? engipayWalletThemeLight : engipayWalletTheme}
+          theme={resolvedTheme === "light" ? najipayWalletThemeLight : najipayWalletTheme}
           // "compact" drops RainbowKit's illustrated "What is a Wallet?" panel,
           // which is the cartoon half of the dialog.
           modalSize="compact"
-          appInfo={{ appName: "EngiPay" }}
+          appInfo={{ appName: "NaijaPay" }}
         >
           {children}
         </RainbowKitProvider>

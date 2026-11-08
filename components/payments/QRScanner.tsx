@@ -14,7 +14,7 @@ interface QRScannerProps {
 }
 
 /** The element html5-qrcode mounts its video into. */
-const REGION_ID = "engipay-qr-region"
+const REGION_ID = "najipay-qr-region"
 
 export function QRScanner({ onScan, onClose }: QRScannerProps) {
   const [isScanning, setIsScanning] = useState(false)

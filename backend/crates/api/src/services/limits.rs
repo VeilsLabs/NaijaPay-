@@ -1,7 +1,7 @@
 //! AML velocity limits: a rolling 24-hour transaction volume ceiling per KYC
 //! tier (issues #113, #114).
 
-use engipay_core::{Asset, Money, UserId};
+use najipay_core::{Asset, Money, UserId};
 use sqlx::PgPool;
 
 use crate::error::ApiError;
@@ -43,7 +43,7 @@ fn tier_daily_limit(tier: i32) -> Money {
 /// the trailing 24 hours, read straight from the ledger postings that back
 /// every balance.
 ///
-/// Scope note: EngiPay's ledger currently has no `withdrawal`/`off_ramp`
+/// Scope note: NaijaPay's ledger currently has no `withdrawal`/`off_ramp`
 /// transaction kind (off-ramps live in a separate, not-yet-wired-in
 /// `ramp_orders` table), so only `transfer`-kind outflows are counted here;
 /// see the PR description.

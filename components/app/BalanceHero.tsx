@@ -7,7 +7,7 @@ import { useWallet } from "@/contexts/WalletContext"
 import { shortenAddress } from "@/lib/payment-uri"
 import { cn } from "@/lib/utils"
 
-const HIDDEN_KEY = "engipay-hide-balance"
+const HIDDEN_KEY = "najipay-hide-balance"
 
 /**
  * The first thing on the home screen: what you hold, and the two things people

@@ -1,15 +1,15 @@
 /**
  * Reading and writing payment codes.
  *
- * EngiPay shows and accepts five shapes, in this order of preference:
- *   1. an EngiPay JSON envelope, which carries a note and a reference
+ * NaijaPay shows and accepts five shapes, in this order of preference:
+ *   1. an NaijaPay JSON envelope, which carries a note and a reference
  *   2. EIP-681  (ethereum:0x…@8453)            - understood by every EVM wallet
  *   3. BIP-21   (bitcoin:bc1…?amount=…)        - understood by every BTC wallet
  *   4. SEP-7    (web+stellar:pay?destination=…) - understood by Stellar wallets
  *   5. a bare address
  *
- * An EngiPay envelope always embeds the standard URI as well, so a code we
- * produce still works in a wallet that has never heard of EngiPay.
+ * An NaijaPay envelope always embeds the standard URI as well, so a code we
+ * produce still works in a wallet that has never heard of NaijaPay.
  */
 
 export type PaymentChain = "base" | "bitcoin" | "stellar"
@@ -31,12 +31,12 @@ export interface ParsedPayment {
    * customer, so a payment that drops it can be lost.
    */
   memo?: StellarMemo
-  /** Free-text note carried by EngiPay codes. */
+  /** Free-text note carried by NaijaPay codes. */
   reference?: string
   /** EVM chain the code names, when it names one. */
   chainId?: number
   /**
-   * False when the code is for a network EngiPay does not send on. The code is
+   * False when the code is for a network NaijaPay does not send on. The code is
    * still returned so the UI can say what it is, rather than "not recognised".
    */
   supportedNetwork: boolean
@@ -164,7 +164,7 @@ function parseEngipayEnvelope(raw: string): ParsedPayment | null {
   } catch {
     return null
   }
-  if (!data || data.type !== "engipay.request") return null
+  if (!data || data.type !== "najipay.request") return null
 
   const to = typeof data.to === "string" ? data.to.trim() : ""
   const chain: PaymentChain =
@@ -279,7 +279,7 @@ function parseBip21(raw: string): ParsedPayment | null {
  * SEP-7: web+stellar:pay?destination=G…&amount=…&asset_code=USDC&asset_issuer=G…&memo=…
  *
  * Refused outright when anything that decides where money goes is malformed:
- * the destination, the asset issuer, the amount, or a memo EngiPay cannot
+ * the destination, the asset issuer, the amount, or a memo NaijaPay cannot
  * attach. A code that is half understood must not be paid.
  */
 function parseSep7(raw: string): ParsedPayment | null {
@@ -411,13 +411,13 @@ export function buildPaymentUri(options: BuildRequestOptions): string {
 }
 
 /**
- * Builds the EngiPay envelope, with the standard URI embedded so outside
+ * Builds the NaijaPay envelope, with the standard URI embedded so outside
  * wallets can still pay it.
  */
 export function buildEngipayRequest(options: BuildRequestOptions): string {
   const payload: Record<string, unknown> = {
     v: 1,
-    type: "engipay.request",
+    type: "najipay.request",
     chain: options.chain,
     to: options.address,
     uri: buildPaymentUri(options),

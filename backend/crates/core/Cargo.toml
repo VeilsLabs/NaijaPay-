@@ -1,5 +1,5 @@
 [package]
-name = "engipay-core"
+name = "najipay-core"
 description = "Shared domain types: assets, exact money, identifiers."
 version.workspace = true
 edition.workspace = true
